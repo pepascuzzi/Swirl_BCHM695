@@ -105,8 +105,8 @@
 
 - Class: cmd_question
   Output: Look at the contents of your home directory by entering 'list.files(path = "~")'.
-  CorrectAnswer: list.files(path = "`")
-  AnswerTests: omnitest(correctExpr='list.files(path = "`")')
+  CorrectAnswer: list.files(path = "~")
+  AnswerTests: omnitest(correctExpr='list.files(path = "~")')
   Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
 
 - Class: text
