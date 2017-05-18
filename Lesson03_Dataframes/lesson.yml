@@ -1,0 +1,925 @@
+- Class: meta
+  Course: IntroToR
+  Lesson: Lesson03_Dataframes
+  Author: Pete E. Pascuzzi
+  Type: Standard
+  Organization: Purdue University
+  Version: 2.4.2
+
+- Class: text
+  Output: In this lesson, you will be introduced to 'data frames', possibly 
+    the most important object class in R.  
+
+- Class: text
+  Output: A data frame is comprised of 'vectors', so this lesson will build 
+    on what you learned in Lesson 02.  
+
+- Class: text
+  Output: In this lesson, you will gain experience with R functions such 
+    as 'head()', 'tail()', 'dim()', and 'summary()' that allow you to explore 
+    the size and data types stored in a 'data frame'.
+
+- Class: text
+  Output: You will learn how to extract values from a 'data frame' using 
+    the operators '[]', '[[]]' and '$'.
+
+- Class: text
+  Output: You will learn how to create indexing variables that allow you 
+    to extract subsets from a 'data frame'.
+
+- Class: text
+  Output: You will learn how to identify and convert potential 'factors' 
+    from character or numeric vectors using 'as.factor()' or 'factor()'.
+
+- Class: text
+  Output: You will learn how to use 'table()' to tabulate or cross-tabulate 
+    one or more 'factors'.
+
+- Class: text
+  Output: You will learn how to use 'tapply()' to summarize specific variables 
+    grouped by a 'factor'.
+
+- Class: text
+  Output: You will learn how to use 'boxplot()' to create a visual summary 
+    of a numeric variable grouped by a 'factor'.
+
+- Class: text
+  Output: You will learn how to use 'write.table()' and 'read.delim()' to 
+    create a data frame from a tab-delimited text file.
+
+- Class: text
+  Output: In Lesson02_Vectors, you worked with numeric and character 
+    vectors and a similar object called a factor.  
+
+- Class: text
+  Output: You were able to use these objects to create plots and tables 
+    to explore the data.  This was possible because the data in these objects 
+    was "parallel", i.e. the vectors were ordered so that data at each position 
+    applies to the same sample or record.
+
+- Class: cmd_question
+  Output: Enter 'vectorPlot()' to generate a figure that illustrates 
+    "parallel" vectors.  Make sure your Plots Plane is selected and large 
+    enough to fit the plot.
+  CorrectAnswer: vectorPlot()
+  AnswerTests: omnitest(correctExp='vectorPlot()')
+  Hint: Enter 'vectorPlot()' omitting the quotes.  Make sure your plot 
+    pane is large enough for the figure.
+
+- Class: text
+  Output: However, you can sort or reorder vectors in R, so what happens if 
+    your values are no longer "parallel"?
+
+- Class: cmd_question
+  Output: Enter 'vectorPlotScrambled()' to generate a figure that illustrates 
+    "scrambled" vectors.
+  CorrectAnswer: vectorPlotScrambled()
+  AnswerTests: omnitest(correctExp='vectorPlotScrambled()')
+  Hint: Enter 'vectorPlotScrambled()' omitting the quotes.  Make sure your plot 
+    pane is large enough for the figure.  
+
+- Class: text
+  Output: As shown in the figure, the positions in vector "B" and "C" are 
+    no longer "parallel" with vector "A".  Any analysis that uses data in 
+    vector "B" or "C" will not be accurate.
+
+- Class: text
+  Output: So, how can you store data where multiple variables are stored for 
+    each sample or record?  The answer is a 'data frame', a 'list' of "parallel" 
+    'vectors' that is similar to an Excel worksheet in many respects.
+
+- Class: text
+  Output: In a 'data frame', the 'vectors' are coupled so that the data is 
+    "parallel" and cannot be easily scrambled.  
+
+- Class: cmd_question
+  Output: Enter 'dataframePlot()' to generate a figure that illustrates 
+    the linked 'vectors' in a 'data frame'.
+  CorrectAnswer: dataframePlot()
+  AnswerTests: omnitest(correctExp='dataframePlot()')
+  Hint: Enter 'dataframePlot()' omitting the quotes.  Make sure your plot 
+    pane is large enough for the figure.
+
+- Class: text
+  Output: If you sort or reorder the values in a 'data frame', all 'vectors' 
+    in that 'data frame' are also sorted or reordered to avoid any errors 
+    during analysis.
+
+- Class: cmd_question
+  Output: Enter 'dataframeSortPlot()' to generate a figure that illustrates 
+    how all in a data frame .
+  CorrectAnswer: dataframeSortPlot()
+  AnswerTests: omnitest(correctExp='dataframeSortPlot()')
+  Hint: Enter 'dataframeSortPlot()' omitting the quotes.  Make sure your plot 
+    pane is large enough for the figure.
+
+- Class: text
+  Output: It is still possible to scramble the data in a data frame, but it 
+    requires a deliberate effort.  
+
+- Class: text
+  Output: Now that you understand the need for a data frame, let's look at 
+    them in more detail.
+
+- Class: text
+  Output: When you started this lesson, a data frame was read into your 
+    workspace from a text file that was bundled with this swirl lesson.  
+
+- Class: cmd_question
+  Output: Enter 'ls()' to list the objects in your workspace.  
+  CorrectAnswer: ls()
+  AnswerTests: omnitest(correctExp='ls()')
+  Hint: Enter 'ls()' omitting the quotes.  
+
+- Class: text
+  Output: You should see five objects, the four functions that you used to 
+    generate figures, and an object named 'ar.exp'.  You can 
+    determine the 'class' of this objects with the 'class()' function.
+
+- Class: cmd_question
+  Output: Enter 'class(ar.exp)' to determine the class of 'ar.exp'.  
+  CorrectAnswer: class(ar.exp)
+  AnswerTests: omnitest(correctExp='class(ar.exp)')
+  Hint: Enter 'class(ar.exp)' omitting the quotes.  
+
+- Class: text
+  Output: You should see the result 'data.frame' in the Console.  
+
+- Class: text
+  Output: You can use the 'head()' function to see the first few rows of 
+    either data frame.
+
+- Class: cmd_question
+  Output: Enter 'head(ar.exp, n=10)' to see the first ten rows of 'ar.exp'.  
+  CorrectAnswer: head(ar.exp, n=10)
+  AnswerTests: omnitest(correctExp='head(ar.exp, n=10)')
+  Hint: Enter 'head(ar.exp, n=10)' omitting the quotes.  
+
+- Class: text
+  Output: It is generally a good idea to look at the last few rows of a 
+    data frame as well.
+
+- Class: cmd_question
+  Output: Enter 'tail(ar.exp, n=10)' to see the first ten rows of 'ar.exp'.  
+  CorrectAnswer: tail(ar.exp, n=10)
+  AnswerTests: omnitest(correctExp='tail(ar.exp, n=10)')
+  Hint: Enter 'tail(ar.exp, n=10)' omitting the quotes.  
+
+- Class: text
+  Output: For both 'head()' and 'tail()', you should see ten rows of data 
+    for 6 columns with each column containing a separate variable.  
+
+- Class: text
+  Output: This data was downloaded from cBioPortal and contains data for 
+    about 9100 samples from multiple cancer studies.  
+
+- Class: text
+  Output: You can determine the exact size of a data frame with the 'dim()' 
+    function.  
+
+- Class: cmd_question
+  Output: Enter 'dim(ar.exp)' to determine the number of rows and columns 
+    in 'ar.exo'.  
+  CorrectAnswer: dim(ar.exp)
+  AnswerTests: omnitest(correctExp='dim(ar.exp)')
+  Hint: Enter 'dim(ar.expt)' omitting the quotes.  
+
+- Class: text
+  Output: The dimensions of an object are always given with rows first then 
+    columns.  This data set has 9121 rows and six columns.  Each row corresponds 
+    to one sample, and each column to one variable.
+
+- Class: text
+  Output: This data set is "rectangular" because there is an entry in every 
+    column for each sample.
+
+- Class: text
+  Output: You can use the function 'summary()' to get a quick summary of each 
+    column or variable in a data frame.  Remember the issue with rounding 
+    of numbers from the Vectors lesson!
+
+- Class: cmd_question
+  Output: Enter 'summary(ar.exp)' to determine the number of rows and columns 
+    in 'ar.exp'.  
+  CorrectAnswer: summary(ar.exp)
+  AnswerTests: omnitest(correctExp='summary(ar.exp)')
+  Hint: Enter 'summary(ar.exp)' omitting the quotes.  
+
+- Class: text
+  Output: This data frame contains the mutation status and the RNA seq 
+    expression value for the AR gene across various TCGA cancer studies.  
+
+- Class: text
+  Output: Each column in a data frame is a vector, and the function 
+    'summary()' shows that the first five variables or columns are character 
+    vectors while the last column, Value, is a numeric vector.  
+
+- Class: text
+  Output: Very little information is provided for the first five columns, 
+    but summary statistics are give for the 'numeric vector', Value.
+
+- Class: text
+  Output: In fact, some of the first five variables are probably better 
+    represented as 'factors', categorical variables that have a limited 
+    number of valid values.  
+
+- Class: text
+  Output: We can use the function 'table()' to tabulate the number of occurences 
+    of particular character strings in a character vector.
+
+- Class: text
+  Output: To do this, we must "extract" a single column or vector from our data frame.  
+    There are actually three valid ways to do this.  
+
+- Class: cmd_question
+  Output: Enter 'help(Extract)' to go to the help page for operators that 
+    allow you to extract values from various R objects.
+  CorrectAnswer: help(Extract)
+  AnswerTests: omnitest(correctExp='help(Extract)')
+  Hint: Enter 'help(Extract)' omitting the quotes.  
+
+- Class: text
+  Output: This help page is a little dense, but it does show that we can 
+    use three operators for extraction, single brackets '[]', double brackets '[[]]', 
+    or the dollar sign '$'.
+
+- Class: text
+  Output: Of these, the dollar sign '$' is probably the easiest to use.  
+    Simply use the data frame name and the desired column name joined by 
+    the dollar sign.
+
+- Class: cmd_question
+  Output: Enter 'head(ar.exp$Cancer.Study)' to show the first few rows of 
+    the Cancer.Study column.
+  CorrectAnswer: head(ar.exp$Cancer.Study)
+  AnswerTests: omnitest(correctExp='head(ar.exp$Cancer.Study)')
+  Hint: Enter 'head(ar.exp$Cancer.Study)' omitting the quotes.  
+
+- Class: text
+  Output: You can also extract a column from a data frame with double brackets '[[]]'.  
+    You simply follow the data frame name with the desired column name or number 
+    enclosed by '[[]]'.
+
+- Class: cmd_question
+  Output: Enter 'head(ar.exp[["Cancer.Study"]])' to show the first few rows of 
+    the Cancer.Study column.
+  CorrectAnswer: head(ar.exp[["Cancer.Study"]])
+  AnswerTests: omnitest(correctExp='head(ar.exp[["Cancer.Study"]])')
+  Hint: Enter 'head(ar.exp[["Cancer.Study"]])' omitting the quotes.  
+
+- Class: text
+  Output: Extracting values with single brackets '[]' is more flexible, but 
+    you must specify both rows and columns for the data frame.  Our data frame 
+    does not have rownames, so we will use row numbers.  For columns, you 
+    can use either the column name or the column number.
+
+- Class: cmd_question
+  Output: Enter 'ar.exp[1:10, "Cancer.Study"]' to show the first ten rows of 
+    the Cancer.Study column.
+  CorrectAnswer: ar.exp[1:10, "Cancer.Study"]
+  AnswerTests: omnitest(correctExp='ar.exp[1:10, "Cancer.Study"]')
+  Hint: Enter 'ar.exp[1:10, "Cancer.Study"]' omitting the quotes.  
+
+- Class: text
+  Output: Now that we know how to extract a single column from a data frame, 
+    we can use 'table()' to tabulate the values in the column 'Cancer.Study'.
+
+- Class: cmd_question
+  Output: Enter 'study.tbl <- table(ar.exp$Cancer.Study)' to tabulate the values in the 
+    column 'Cancer.Study' and save as an object called 'study.tbl'.
+  CorrectAnswer: study.tbl <- table(ar.exp$Cancer.Study)
+  AnswerTests: omnitest(correctExp='study.tbl <- table(ar.exp$Cancer.Study)')
+  Hint: Enter 'study.tbl <- table(ar.exp$Cancer.Study)' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'study.tbl' to display the table in the Console.
+  CorrectAnswer: study.tbl
+  AnswerTests: omnitest(correctExp='study.tbl')
+  Hint: Enter 'study.tbl' omitting the quotes.  
+
+- Class: text
+  Output: You should see the study names listed with a numeric value that 
+    indicates the number of samples in that study.
+
+- Class: text
+  Output: We can use 'barchart()' to make a quick visual summary of this 
+    table.  First, we can use the function 'sort()' to arrange the table 
+    by decreasing sample count.
+
+- Class: cmd_question
+  Output: Enter 'study.tbl <- sort(study.tbl, decreasing=TRUE)' to sort 'study.tbl' 
+    in decreasing order and reassign this to 'study.tbl'.  
+  CorrectAnswer: study.tbl <- sort(study.tbl, decreasing=TRUE)
+  AnswerTests: omnitest(correctExp='study.tbl <- sort(study.tbl, decreasing=TRUE)')
+  Hint: Enter 'study.tbl <- sort(study.tbl, decreasing=TRUE)' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'study.tbl' to display the table in the Console.
+  CorrectAnswer: study.tbl
+  AnswerTests: omnitest(correctExp='study.tbl')
+  Hint: Enter 'study.tbl' omitting the quotes.  
+
+- Class: text
+  Output: It may seem odd that we can overwrite 'study.tbl' in this way, but 
+    recursive operations like this are common in computer science.  Just be 
+    careful with such operations because there is no "undo" function in R.  
+
+- Class: text
+  Output: The study names are quite long.  We can make shorter labels for 
+    our plot as we did in Lesson 02.  In this case, the character vector 
+    that we need is the 'names' of  the sorted 'study.tbl'.
+
+- Class: cmd_question
+  Output: Make a new character vector of labels by entering 'study.labels <- 
+    substr(names(study.tbl), start=1, stop=15)'.
+  CorrectAnswer: study.labels <- substr(names(study.tbl), start=1, stop=15)
+  AnswerTests: omnitest(correctExpr='study.labels <- substr(names(study.tbl), start=1, stop=15)')
+  Hint: Enter 'study.labels <- substr(names(study.tbl), start=1, stop=15)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Enter 'study.labels' to display the labels in the Console.
+  CorrectAnswer: study.labels
+  AnswerTests: omnitest(correctExp='study.labels')
+  Hint: Enter 'study.labels' omitting the quotes.  
+
+- Class: text
+  Output: Now, we have everything that we need for a barplot.  If you want, 
+    go to the help page for the function 'barplot()'.
+
+- Class: cmd_question
+  Output: Make a barplot of the study table by entering 
+    'barplot(study.tbl, names.arg=study.labels, las=2, cex.names=0.8, main="Sample Count for Cancer Studies")'.
+  CorrectAnswer: barplot(study.tbl, names.arg=study.labels, las=2, cex.names=0.8, main="Sample Count for Cancer Studies")
+  AnswerTests: omnitest(correctExpr='barplot(study.tbl, names.arg=study.labels, las=2, cex.names=0.8, main="Sample Count for Cancer Studies")')
+  Hint: This is a long expression, so please copy and paste to avoid typos.  
+
+- Class: text
+  Output: There are a few problems with this plot, 1) the study labels are 
+    cut-off, 2) the gray bars are boring, and 3) the longest bar extends 
+    beyond the y-axis,.
+
+- Class: text
+  Output: We can address the first issue by altering the margin size for 
+    the plot with the 'par()' function.
+
+- Class: cmd_question
+  Output: Go to the help page for 'par()' by entering '?par'.
+  CorrectAnswer: ?par
+  AnswerTests: omnitest(correctExp='?par')
+  Hint: Enter '?par' omitting the quotes.  
+
+- Class: text
+  Output: There are 72 graphical parameters that can be used to change the 
+    appearance of plots.  Some of these, such as 'las', can be set when 
+    you generate a plot.  Others, need to be set with the 'par()' function.  
+
+- Class: text
+  Output: One of these are 'mai' and 'mar', two parameters that can be used 
+    to change margin sizes.  The first sets the margin in inches, while the 
+    second specifies lines (there are 5 lines per inch).  Altering one, 
+    necessarily alters the other.
+
+- Class: text
+  Output: Both 'mai' and 'mar' are set by numeric vectors in the form of 
+    'c(bottom margin, left margin, top margin, right margin)'.  Once these 
+    parameters are changed from the default, they are set for all subsequent 
+    plot unless you change them again.
+
+- Class: cmd_question
+  Output: Enter 'par(mai=c(2, 1, 1, 0.5))' to change the plot margins to 
+    bottom = 2, left = 1, top = 1, and right = 0.5 inches.
+  CorrectAnswer: par(mai=c(2, 1, 1, 0.5))
+  AnswerTests: omnitest(correctExp='par(mai=c(2, 1, 1, 0.5))')
+  Hint: Enter 'par(mai=c(2, 1, 1, 0.5))' omitting the quotes.  
+
+- Class: text
+  Output: To change the color of the bars, we can create a vector of colors 
+    using a predefined color palette in R.  Color use in data visualizations 
+    is a combination of art and science.  Here, we are simply going to use 
+    the 'rainbow()' palette in R, toning down the saturation and value a bit.
+
+- Class: cmd_question
+  Output: Enter 'study.cols <- rainbow(n=length(study.labels), s=0.8, v=0.9)' 
+    to create a character vector of color for the barplot.  
+  CorrectAnswer: study.cols <- rainbow(n=length(study.labels), s=0.8, v=0.9)
+  AnswerTests: omnitest(correctExp='study.cols <- rainbow(n=length(study.labels), s=0.8, v=0.9)')
+  Hint: Enter 'par(mai=c(2, 1, 1, 0.5))' omitting the quotes.  
+
+- Class: text
+  Output: To fix the issue of one bar extending beyond the y-axis, we need 
+    to explicitly set the limits for the y-axis in the barplot with the 
+    parameter 'ylim'.  
+
+- Class: cmd_question
+  Output: Make a revised barplot of the study table by entering 
+    'barplot(study.tbl, names.arg=study.labels, las=2, horiz=FALSE, cex.names=0.8, main="Sample Count for Cancer Studies", col=study.cols, ylim=c(0, 1200))'.
+  CorrectAnswer: barplot(study.tbl, names.arg=study.labels, las=2, horiz=FALSE, cex.names=0.8, main="Sample Count for Cancer Studies", col=study.cols, ylim=c(0, 1200))
+  AnswerTests: omnitest(correctExpr='barplot(study.tbl, names.arg=study.labels, las=2, horiz=FALSE, cex.names=0.8, main="Sample Count for Cancer Studies", col=study.cols, ylim=c(0, 1200))')
+  Hint: This is a long expression, so please copy and paste to avoid typos.  
+
+- Class: text
+  Output: Now, we have a presentable barplot that summarizes the number of 
+    samples in each cancer study.  In addition, we have a clear example of a
+    variable that should be handled as a 'factor' and not a 'character 
+    vector'.  
+
+- Class: text
+  Output: To illustrate why this is important, we can make a table of Cancer 
+    Studies on a subset of samples.  As in Lesson 02, we will define high 
+    AR expression as log2(Value + 0.01) >= 10 (you need to add a small constant 
+    to prevent taking a log2 of zero) to generate a logical vector for 
+    indexing.  The cutoff has been raised to 10 because we are looking for 
+    individual samples with high values, not cancer studies with high mean 
+    values.
+
+- Class: cmd_question
+  Output: Enter 'ar.exp$Value <- log2(ar.exp$Value + 0.01)' to log2 transform 
+    the AR expression values.
+  CorrectAnswer: ar.exp$Value <- log2(ar.exp$Value + 0.01)
+  AnswerTests: omnitest(correctExp='ar.exp$Value <- log2(ar.exp$Value + 0.01)')
+  Hint: Enter 'ar.exp$Value <- log2(ar.exp$Value + 0.01)' omitting the quotes.  
+
+- Class: text
+  Output: The original expression values were given to four decimal places, 
+    so we will do the same with the log2 transformed data.
+
+- Class: cmd_question
+  Output: Enter 'ar.exp$Value <- round(ar.exp$Value, digits=4)' to log2 transform 
+    the AR expression values.
+  CorrectAnswer: ar.exp$Value <- round(ar.exp$Value, digits=4)
+  AnswerTests: omnitest(correctExp='ar.exp$Value <- round(ar.exp$Value, digits=4)')
+  Hint: Enter 'ar.exp$Value <- round(ar.exp$Value, digits=4)' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'summary(ar.exp$Value)' to log2 transform 
+    the AR expression values.
+  CorrectAnswer: summary(ar.exp$Value)
+  AnswerTests: omnitest(correctExp='summary(ar.exp$Value)')
+  Hint: Enter 'summary(ar.exp$Value)' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'high.ar <- ar.exp$Value >= 10' to generate a logical 
+    vector that can be used to extract samples with high AR expression.  
+  CorrectAnswer: high.ar <- ar.exp$Value >= 10
+  AnswerTests: omnitest(correctExp='high.ar <- ar.exp$Value >= 10')
+  Hint: Enter 'high.ar <- ar.exp$Value >= 10' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])' to 
+    determine the high expression sample count for cancer studies.
+  CorrectAnswer: high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])
+  AnswerTests: omnitest(correctExp='high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])')
+  Hint: Enter 'high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'high.ar.study.tbl' to display the table.  
+  CorrectAnswer: high.ar.study.tbl
+  AnswerTests: omnitest(correctExp='high.ar.study.tbl')
+  Hint: Enter 'high.ar.study.tbl' omitting the quotes.  
+
+- Class: text
+  Output: Note that this table is much smaller than the complete table, and 
+    only six out of thirty studies are represented.  This creates a potential 
+    problem for analysis because the table is essentially incomplete.
+
+- Class: text
+  Output: We may know that there are zero high expression samples in the 
+    other studies, but if we share the result, others may not realize that 
+    the other studies were even considered.
+
+- Class: text
+  Output: Converting 'ar.exp$Cancer.Study' to a factor will correct this 
+    issue.  If you want a specific order to the levels (possible values) 
+    in your factor, you need to explicitly define the factor with the 'factor()' 
+    function.  
+
+- Class: text
+  Output: If you simply want to convert an existing character vector to a 
+    factor, and alphabetical ordering of levels is fine, you can use the 
+    'as.factor()' function.
+
+- Class: text
+  Output: In our case, we want the order the levels to be the same as the 
+    order in the study table and barplot, in decreasing order of sample count.  
+    We can use the names of 'study.tbl' to provide the levels.
+
+- Class: cmd_question
+  Output: Enter 'ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(study.tbl))' 
+    to convert Cancer.Study to a factor.  
+  CorrectAnswer: ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(study.tbl))
+  AnswerTests: omnitest(correctExp='ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(study.tbl))')
+  Hint: Enter 'ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(study.tbl))' omitting the quotes.  
+
+- Class: text
+  Output: Now, we can revise our the study sample count table for high AR 
+    expression samples and display the result.  
+
+- Class: cmd_question
+  Output: Enter 'high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])' to 
+    determine the high expression sample count for cancer studies.
+  CorrectAnswer: high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])
+  AnswerTests: omnitest(correctExp='high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])')
+  Hint: Enter 'high.ar.study.tbl <- table(ar.exp$Cancer.Study[high.ar])' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'high.ar.study.tbl' to display the table.  
+  CorrectAnswer: high.ar.study.tbl
+  AnswerTests: omnitest(correctExp='high.ar.study.tbl')
+  Hint: Enter 'high.ar.study.tbl' omitting the quotes.  
+
+- Class: text
+  Output: Now, we have a more complete picture of the distribution of high AR expressing 
+    samples across the cancer studies.  
+
+- Class: text
+  Output: We can also use 'ar.exp$Cancer.Study' and 'high.ar' to tabulate 
+    high AR expressing samples with respect to cancer study.  
+
+- Class: cmd_question
+  Output: Enter 'table(ar.exp$Cancer.Study, high.ar)' to cross-tabulate 
+    Cancer Study and high AR expressing samples.  
+  CorrectAnswer: table(ar.exp$Cancer.Study, high.ar)
+  AnswerTests: omnitest(correctExp='table(ar.exp$Cancer.Study, high.ar)')
+  Hint: Enter 'table(ar.exp$Cancer.Study, high.ar)' omitting the quotes.  
+
+- Class: text
+  Output: The function 'table()' is extremely useful, and can be used with 
+    many downstream statistical tests (not covered here).  
+
+- Class: text
+  Output: In Lesson 02, 'ar.value' was a numeric vector that contained 
+    the median log2-transformed expression values for AR for each cancer 
+    study.  
+
+- Class: text
+  Output: The vector 'ar.value' was derived from 'ar.exp$Value' using the 
+    'tapply()' function.
+
+- Class: text
+  Output: You can go to the help page for 'tapply()' but it is pretty cryptic.  
+    A more concise explanation, still cryptic, is that 'tapply()' will 
+    "apply" a specified function to the values in one vector that can be 
+    grouped or indexed by the values in a second vector.  The mnemonic to 
+    remember this is "type apply" where type refers to a grouping variable 
+    or factor..  
+
+- Class: text
+  Output: As an example, we can recreate 'ar.value' from two columns in 
+    'ar.exp', Value and Cancer.Study, using 'tapply()', 'log2()' and 'median()'.
+
+- Class: cmd_question
+  Output: Enter 'ar.value <- tapply(ar.exp$Value, INDEX=ar.exp$Cancer.Study, FUN=median)' 
+    to determine the median log2 expression values for all samples in each 
+    cancer study.
+  CorrectAnswer: ar.value <- tapply(ar.exp$Value, INDEX=ar.exp$Cancer.Study, FUN=median)
+  AnswerTests: omnitest(correctExp='ar.value <- tapply(ar.exp$Value, INDEX=ar.exp$Cancer.Study, FUN=median)')
+  Hint: Enter 'ar.value <- tapply(ar.exp$Value, INDEX=ar.exp$Cancer.Study, FUN=median)' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'ar.value' to display the data.
+  CorrectAnswer: ar.value
+  AnswerTests: omnitest(correctExp='ar.value')
+  Hint: Enter 'ar.value' omitting the quotes.  
+
+- Class: text
+  Output: R grouped 'Value' by 'Cancer.Study' then applied the function 'median()' 
+    to each group.  In the Console, you should see each cancer study followed 
+    by the median expression value of AR for the samples in that study.
+
+- Class: text
+  Output: You can use almost any function with 'tapply()', even user-defined 
+    functions, provided that is makes sense for the given data.  
+
+- Class: text
+  Output: In addition, the 'INDEX' vector does not need to be a 'factor' 
+    but it should be a variable that is potentially a good factor.  For example, 
+    it does not make sense to use 'ar.exp$Sample.Id' as an 'INDEX' because 
+    the Sample Ids are unique.
+
+- Class: text
+  Output: We can visualize the median AR expression values as a barplot similar 
+    to the plot of cancer study sample count.
+
+- Class: cmd_question
+  Output: Make a barplot of 'ar.value'  by entering 
+    'barplot(ar.value, names.arg=study.labels, las=2, horiz=FALSE, cex.names=0.8, main="Median AR Expression", col=study.cols, ylim=c(0, 10))'.
+  CorrectAnswer: barplot(ar.value, names.arg=study.labels, las=2, horiz=FALSE, cex.names=0.8, main="Median AR Expression", col=study.cols, ylim=c(0, 10))
+  AnswerTests: omnitest(correctExpr='barplot(ar.value, names.arg=study.labels, las=2, horiz=FALSE, cex.names=0.8, main="Median AR Expression", col=study.cols, ylim=c(0, 10))')
+  Hint: This is a long expression, so please copy and paste to avoid typos.  
+
+- Class: text
+  Output: A barplot was fine for the sample counts, but it is not very informative 
+    for AR expression values because there is no sense of the variance in 
+    the data.  
+
+- Class: text
+  Output: A superior plot for continuous data is a boxplot.  First, we will 
+    make a boxplot of AR expression values across all cancer studies.  You 
+    may want to go to the help page for 'boxplot()'.
+
+- Class: cmd_question
+  Output: Enter 'boxplot(ar.exp$Value)' to make a boxplot of AR expression 
+    values across all cancer studies.
+  CorrectAnswer: boxplot(ar.exp$Value)
+  AnswerTests: omnitest(correctExp='boxplot(ar.exp$Value)')
+  Hint: Enter 'boxplot(ar.exp$Value)' omitting the quotes.  
+
+- Class: text
+  Output: A boxplot visualizes several important properties of a variable. The box is 
+    defined by three values, the bottom edge of the box is the bottom of the 2nd 
+    quartile of the data, the heavy center line is the top of the 2nd quartile, also 
+    called the median value, and the top of the box is the top of the 3rd quartile. 
+
+- Class: text
+  Output: Each quartile contains 25% of the data.  Thus, 50% of the data 
+    lies within the box.  The height of this box is called the Inter Quartile 
+    Range (IQR).
+
+- Class: text
+  Output: The whiskers extend from the box to enclose the remaining values 
+    or range of the data.  However, the whiskers will extend no more 
+    than 1.5 times the IQR.  Any value beyond that range is considered a 
+    possible outlier.  
+
+- Class: text
+  Output: You can adjust how far the whiskers extend with the 'range' parameter 
+    to 'boxplot()'.  However, alter this default parameter only with good 
+    reason.  
+
+- Class: text
+  Output: A great feature of 'boxplot()' is that, like 'tapply()', it can 
+    summarize data with respect to an indexing variable or factor.  This 
+    feature makes it very easy to graphically examine AR expression across 
+    the cancer studies.  
+
+- Class: cmd_question
+  Output: Enter 'boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, main="AR Expression Across Cancer Studies")' to make a boxplot of AR expression 
+    values across all cancer studies.
+  CorrectAnswer: boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, main="AR Expression Across Cancer Studies")
+  AnswerTests: omnitest(correctExp='boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, main="AR Expression Across Cancer Studies")')
+  Hint: Enter 'boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, main="AR Expression Across Cancer Studies")' omitting the quotes.  
+
+- Class: text
+  Output: Note the formula format that was used, 'Value' ~ 'Cancer.Study'.  Read this 
+    as "Value as a function of Cancer.Study" where 'Value' is the dependent variable 
+    and 'Cancer.Study' is the independent variable.
+
+- Class: text
+  Output: Like 'tapply()', when supplied with a grouping variable, 'boxplot()' 
+    will perform all calculations on the data after it has been split by group.  
+    Thus, we have a plot comprised of 30 individual boxplots.  
+
+- Class: text
+  Output: One problem with this plot is that the cancer studies are sorted 
+    by sample count, not AR expression.  We can fix this by changing the 
+    order in our factor 'ar.exp$Cancer.Study' using the median expression 
+    values in 'ar.value'.
+
+- Class: text
+  Output: First, sort 'ar.value' in decreasing order.
+
+- Class: cmd_question
+  Output: Enter 'ar.value <- sort(ar.value, decreasing=TRUE)'.
+  CorrectAnswer: ar.value <- sort(ar.value, decreasing=TRUE)
+  AnswerTests: omnitest(correctExp='ar.value <- sort(ar.value, decreasing=TRUE)')
+  Hint: Enter 'ar.value <- sort(ar.value, decreasing=TRUE)' omitting the quotes.  
+
+- Class: text
+  Output: Second, redefine 'ar.exp$Value' as a 'factor' using the names 
+    form 'ar.value' which list the studies in decreasing order of AR expression.
+
+- Class: cmd_question
+  Output: Enter 'ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(ar.value))'.
+  CorrectAnswer: ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(ar.value))
+  AnswerTests: omnitest(correctExp='ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(ar.value))')
+  Hint: Enter 'ar.exp$Cancer.Study <- factor(ar.exp$Cancer.Study, levels=names(ar.value))' omitting the quotes.  
+
+- Class: text
+  Output: Third, make new labels for the boxplot from the names of 'ar.value'.
+
+- Class: cmd_question
+  Output: Make a new character vector of labels by entering 'study.labels <- 
+    substr(names(ar.value), start=1, stop=15)'.
+  CorrectAnswer: study.labels <- substr(names(ar.value), start=1, stop=15)
+  AnswerTests: omnitest(correctExpr='study.labels <- substr(names(ar.value), start=1, stop=15)')
+  Hint: Enter 'study.labels <- substr(names(ar.value), start=1, stop=15)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Enter 'boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, main="AR Expression Across Cancer Studies")' 
+    to make a  revised boxplot of AR expression values across all cancer studies.
+  CorrectAnswer: boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, main="AR Expression Across Cancer Studies")
+  AnswerTests: omnitest(correctExp='boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, main="AR Expression Across Cancer Studies")')
+  Hint: Enter 'boxplot(ar.exp$Value ~ ar.exp$Cancer.Study, names=study.labels, col=study.cols, las=2, cex=0.8, main="AR Expression Across Cancer Studies")' omitting the quotes.  
+
+- Class: text
+  Output: This is an informative boxplot, suggesting that high AR 
+    expression is associated with specific cancers.  There is certainly enough 
+    published literature to support this idea.  
+
+- Class: text
+  Output: We could do more to explore 'ar.value' using the numerous 
+    functions that work on data frames, but this lesson is intended only as 
+    an introduction.  
+
+- Class: text
+  Output: Two more tasks are critical for working with data frames, 1) saving a 
+    data frame to a text file and 2) reading a text file into R as a data 
+    frame.
+
+- Class: text
+  Output: When this lesson started, the data frame 'ar.exp' was created from 
+    a text file that you downloaded and installed with the swirl course.  
+    That file is "buried" in all the supporting files for R, and the location 
+    depends on your computer.  
+
+- Class: text
+  Output: Now, we can write 'ar.exp' to your current working directory (the 
+    location on your computer where are reads and writes files).  Then, we 
+    can read the file back into R.
+
+- Class: cmd_question
+  Output: Enter 'list.files()' to show the files in your current working directory.
+  CorrectAnswer: list.files()
+  AnswerTests: omnitest(correctExpr='list.files()')
+  Hint: Enter 'list.files()' exactly but omit the quotes.
+
+- Class: text
+  Output: It is not important how many files you have in your directory, but 
+    we will use this function again to confirm that you have written 'ar.exp' 
+    to a file.
+
+- Class: cmd_question
+  Output: Enter '?write.table' to go to the help page for 'write.table()'.
+  CorrectAnswer: ?write.table
+  AnswerTests: omnitest(correctExpr='?write.table')
+  Hint: Enter '?write.table' exactly but omit the quotes.
+
+- Class: text
+  Output: There are six parameters that you generally want to pass to 
+    'write.table()', x = object name you want to save, file = file name, 
+    quote = do you want quotes around characters and factors, sep = character 
+    that separates the fields/columns of data in your text file, 
+    row.names = do you want to write the R row names to the file, and 
+    col.names = do you want to write the R column names to the file.
+
+- Class: text
+  Output: The parameters x and file have no defaults so these must be provided.  
+
+- Class: text
+  Output: For bioinformatics data, you likely want 'quote=FALSE' because quotes 
+    around characters strings and factors are generally not necessary.
+
+- Class: text
+  Output: For bioinformatics data, the most common field separator is a tab 
+    because commas, spaces, and other characters occur frequently in the data 
+    itself.  In R, a tab is represented as "\t".
+
+- Class: text
+  Output: There may be cases when you want to include the R row names because 
+    the row names can be an integral part of the data.  For 'ar.exp', the 
+    row names are simply numbers, so we don't need them.
+
+- Class: text
+  Output: Generally, you want to include the column names.  However, for some 
+    common file formats in bioinformatics, such as BED and GFF files, the 
+    column names are standard, and the column names must be omitted to allow 
+    common bioinformatics software to read the file.  For 'ar.exp', we want 
+    to keep the column names.  
+
+- Class: cmd_question
+  Output: Enter 'write.table(ar.exp, file="AR_Expression.txt", quote=FALSE, sep="\t", row.names=FALSE, col.names=TRUE)' 
+    to save a text file version of 'ar.exp' to your working directory.
+  CorrectAnswer: write.table(ar.exp, file="AR_Expression.txt", quote=FALSE, sep="\t", row.names=FALSE, col.names=TRUE)
+  AnswerTests: omnitest(correctExpr='write.table(ar.exp, file="AR_Expression.txt", quote=FALSE, sep="\t", row.names=FALSE, col.names=TRUE)')
+  Hint: Enter 'write.table(ar.exp, file="AR_Expression.txt", quote=FALSE, sep="\t", row.names=FALSE, col.names=TRUE)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Confirm that you have created "AR_Expression.txt" by entering 'list.files()' 
+    to show the files in your current working directory.
+  CorrectAnswer: list.files()
+  AnswerTests: omnitest(correctExpr='list.files()')
+  Hint: Enter 'list.files()' exactly but omit the quotes.
+
+- Class: text
+  Output: You should see "AR_Expression.txt" in your working directory.  
+    This is a standard text file that can be opened with many programs such 
+    as NotePad, TextWrangler, Word and Excel.  
+
+- Class: text
+  Output: Now, we are simply going to read the file into R as a data frame 
+    with the function 'read.delim()' and compare it to 'ar.exp'.
+
+- Class: cmd_question
+  Output: Enter '?read.delim' to go to the help page for 'Data Input'.
+  CorrectAnswer: ?read.delim
+  AnswerTests: omnitest(correctExpr='?read.delim')
+  Hint: Enter '?read.delim' exactly but omit the quotes.
+
+- Class: text
+  Output: This help page covers, five functions.  Four of these are really 
+    versions of 'read.table()' with different default parameters.  For our 
+    file, 'read.delim()' will work fine because the default parameters are 
+    correct for "AR_Expression.txt", 'header=TRUE' and 'sep="\t"'.
+
+- Class: text
+  Output: However, there is one major issue to address that is peculiar to 
+    R, the conversion of character strings to factors.  By default, R will 
+    do this conversion even when it does not make sense, e.g. unique sample 
+    names are not factors.  Further, for large files, this conversion can 
+    take a long time.  
+
+- Class: text
+  Output: There are two parameters that can be used to suppress this behavior, 
+    'as.is=TRUE' and 'stringsAsFactors=FALSE'.  With 'read.delim()', 'as.is=TRUE' 
+    works fine.  With certain other functions such as 'data.frame()', it 
+    is necessary to use 'stringsAsFactors=FALSE'.
+
+- Class: cmd_question
+  Output: Enter 'ar.exp2 <- read.delim(file="AR_Expression.txt", as.is=TRUE)' to go to the help page for 'Data Input'.
+  CorrectAnswer: ar.exp2 <- read.delim(file="AR_Expression.txt", as.is=TRUE)
+  AnswerTests: omnitest(correctExpr='ar.exp2 <- read.delim(file="AR_Expression.txt", as.is=TRUE)')
+  Hint: Enter 'ar.exp2 <- read.delim(file="AR_Expression.txt", as.is=TRUE)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Enter 'head(ar.exp2, 10)' to display the first 10 rows of ar.exp2.
+  CorrectAnswer: head(ar.exp2, 10)
+  AnswerTests: omnitest(correctExpr='head(ar.exp2, 10)')
+  Hint: Enter 'head(ar.exp2, 10)' exactly but omit the quotes.
+
+- Class: text
+  Output: Do you think that 'ar.exp' and 'ar.exp2' are identical?  We can 
+    check this with the 'identical()' function.  
+
+- Class: cmd_question
+  Output: Enter 'identical(ar.exp, ar.exp2)' to display the first 10 rows of ar.exp2.
+  CorrectAnswer: identical(ar.exp, ar.exp2)
+  AnswerTests: omnitest(correctExpr='identical(ar.exp, ar.exp2)')
+  Hint: Enter 'identical(ar.exp, ar.exp2)' exactly but omit the quotes.
+
+- Class: text
+  Output: The answer is no because 'ar.exp$Cancer.Study' is a factor, while 
+    'ar.exp2$Cancer.Study' is still character because of the way we read in 
+    the data.  This is easy to fix.  
+
+- Class: cmd_question
+  Output: Enter 'ar.exp2$Cancer.Study <- factor(ar.exp2$Cancer.Study, levels=names(ar.value))'.
+  CorrectAnswer: ar.exp2$Cancer.Study <- factor(ar.exp2$Cancer.Study, levels=names(ar.value))
+  AnswerTests: omnitest(correctExp='ar.exp2$Cancer.Study <- factor(ar.exp2$Cancer.Study, levels=names(ar.value))')
+  Hint: Enter 'ar.exp2$Cancer.Study <- factor(ar.exp2$Cancer.Study, levels=names(ar.value))' omitting the quotes.  
+
+- Class: cmd_question
+  Output: Enter 'identical(ar.exp, ar.exp2)' to display the first 10 rows of ar.exp2.
+  CorrectAnswer: identical(ar.exp, ar.exp2)
+  AnswerTests: omnitest(correctExpr='identical(ar.exp, ar.exp2)')
+  Hint: Enter 'identical(ar.exp, ar.exp2)' exactly but omit the quotes.
+
+- Class: text
+  Output: This completes Lesson 03.  A short quiz follows.  Use the help 
+    menu or try various answers as much as you need to.  There is no penalty 
+    for incorrect answers, but you must find the correct answer before you 
+    can proceed.  
+
+- Class: mult_question
+  Output: Which variable in 'ar.exp' would be the most useful factor?
+  CorrectAnswer: Mutation
+  AnswerChoices: Mutation; Profile.Name; Gene
+  AnswerTests: omnitest(correctVal='Mutation')
+  Hint: How many possible values does each variable have?
+
+- Class: cmd_question
+  Output: How many samples in 'ar.exp' have a 'Value' of less than zero?
+  CorrectAnswer: 965
+  AnswerTests: omnitest(correctVal='965')
+  Hint: You might want to make a table of a logical vector.
+
+- Class: cmd_question
+  Output:  How many samples have the Q58L mutation?
+  CorrectAnswer: 8
+  AnswerTests: omnitest(correctVal='8')
+  Hint: You might want to make a table.
+
+- Class: cmd_question
+  Output: Write the expression that would extract the 'Cancer.Study' with 
+    the "Q58L" 'Mutation'.  Use the following operators in your expression 
+    '$', '[]' and '=='.  Remember that "Q58L" is a character string and must 
+    be enclosed by quotes.
+  CorrectAnswer: ar.exp$Cancer.Study[ar.exp$Mutation == "Q58L"]
+  AnswerTests: omnitest(correctExp='ar.exp$Cancer.Study[ar.exp$Mutation == "Q58L"]')
+  Hint: You should use '$' twice, one set of square brackets, and one double 
+    equals sign.
+
+- Class: text
+  Output: You have completed Lesson 03.  Now you need to write the completion 
+    key to "lessonKeys.txt".  Since the file already exists and contains 
+    information we need to preserve, we will use 'append=TRUE' as an argument.
+
+- Class: cmd_question
+  Output: Enter 'write("Lesson03_JVEZM", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)' to append 
+    the key for lesson02 to the file "lessonKeys.txt".
+  CorrectAnswer: write("Lesson03_JVEZM", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)
+  AnswerTests: omnitest(correctExp='write("Lesson03_JVEZM", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)')
+  Hint: Enter 'write("Lesson03_JVEZM", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)' omitting the quotes.
+
+- Class: text
+  Output: If you could not create "lessonKeys.txt", please copy and paste the 
+    key into a Word or text document.

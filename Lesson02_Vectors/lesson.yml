@@ -1,0 +1,665 @@
+- Class: meta
+  Course: IntroToR
+  Lesson: Lesson02_Vectors
+  Author: Pete E. Pascuzzi
+  Type: Standard
+  Organization: Purdue University
+  Version: 2.4.2
+
+- Class: text
+  Output: R is an object-oriented programming language.  From a computer 
+    science perspective, this has a technical meaning.
+
+- Class: text
+  Output: From a practical perspective, this means that R can represent 
+    data in very complex ways, from a simple table of locations and temperatures, 
+    to complete genome-scale experiments in the life sciences.
+
+- Class: text
+  Output: Given that R generally stores these objects in memory, these 
+    objects can accumulate making R a real memory hog.  Try to remember 
+    this as you progress with R.
+    NOTE - WHEN I USE THE TERM MEMORY, I AM NOT REFERRING TO DISK STORAGE.  
+    I AM REFERRING TO THE RANDOM ACCESS MEMORY (RAM) THAT YOUR COMPUTER 
+    USES TO COMPLETE CALCULATIONS AND OTHER PROCESSES.
+
+- Class: text
+  Output: In contrast, Unix programs, while often memory intensive, process 
+    data from files, and save the result to new files.
+
+- Class: text
+  Output: How do you determine the R objects that you have in memory?
+
+- Class: text
+  Output: The 'ls()' function will list the objects that you have in memory.
+
+- Class: cmd_question
+  Output: When you started this lesson, three objects were created.  Enter 
+    'ls()' to list these objects in the Console.
+  CorrectAnswer: ls()
+  AnswerTests: omnitest(correctExpr='ls()')
+  Hint: Enter 'ls()' exactly but omit the quotes.
+
+- Class: text
+  Output: You see the names of three objects in the Console, 'ar.study', 
+    'ar.tissue', and 'ar.value'.
+
+- Class: text
+  Output: You can also view the objects in the Environment pane in the 
+    upper right of RStudio.  By default, the Environment pane has a List 
+    view.  In this view, you get the name of the object followed by some 
+    information about the object.
+
+- Class: text
+  Output: You can change from List view to Grid view by clicking on the 
+    drop down menu in the upper right corner of the Environment window.  
+    Select Grid view now.
+
+- Class: text
+  Output: The Grid view provides a more structured view of the objects and 
+    provides Type, Length, Size and Value for each object.  Each of these 
+    can also be accessed with functions, which is especially important if 
+    you program with R.
+
+- Class: cmd_question
+  Output: Enter 'class(ar.study)' to get the Class for the object 'ar.study'. 
+  CorrectAnswer: class(ar.study)
+  AnswerTests: omnitest(correctExpr='class(ar.study)')
+  Hint: Enter 'class(ar.study)' exactly but omit the quotes.
+
+- Class: text
+  Output: The Class for 'ar.study' is 'character'.  RStudio displays this 
+    as Type which is confusing because, while Type is similar to Class, it 
+    has a slightly different meaning.
+
+- Class: cmd_question
+  Output: So what is an object of class 'character'?  Enter '?character' 
+    to go to the appropriate help page. 
+  CorrectAnswer: ?character
+  AnswerTests: omnitest(correctExpr='?character')
+  Hint: Enter '?character' exactly but omit the quotes.
+
+- Class: text
+  Output: The object 'ar.study' is a character vector.  The help page shows 
+    you how to use the function 'character()' to make a character vector, 
+    but there are many other ways to produce a character vector.
+
+- Class: cmd_question
+  Output: More general information is found on the vector help page.  Enter 
+    '?vector'.
+  CorrectAnswer: ?vector
+  AnswerTests: omnitest(correctExpr='?vector')
+  Hint: Enter '?vector' exactly but omit the quotes.
+
+- Class: text
+  Output: The most basic object in R is the vector.  A vector 
+    is a linear (one-dimensional) collection of values all of the same data 
+    type.  The most common classes or modes of vector are character, numeric, 
+    integer, and logical.
+
+- Class: text
+  Output: In this lesson, you will work with three classes of vector, character, 
+    numeric and logical.  You will also work with factors, an object that 
+    is derived from a character vector, and can be manipulated much like a
+    vector.
+
+- Class: cmd_question
+  Output: You can determine the number of values stored in a vector with 
+    the 'length()' function.  Enter 'length(ar.study)' to determine the 
+    number of values stored in 'ar.study'.
+  CorrectAnswer: length(ar.study)
+  AnswerTests: omnitest(correctExpr='length(ar.study)')
+  Hint: Enter 'length(ar.study)' exactly but omit the quotes.
+
+- Class: text
+  Output: You should find that the length of 'ar.study' is 30.  This vector 
+    is small enough that you can display the contents in the Console.
+
+- Class: cmd_question
+  Output: Enter 'ar.study' to display the contents of this vector.
+  CorrectAnswer: ar.study
+  AnswerTests: omnitest(correctExpr='ar.study')
+  Hint: Enter 'ar.study' exactly but omit the quotes.
+
+- Class: text
+  Output: You should see 30 character strings describing The Cancer Genome 
+    Atlas cancer studies.  Each string should be preceded by an integer 
+    in square brackets.  This integer gives you the index or position for 
+    that character string in the vector.
+
+- Class: text
+  Output: The square brackets, '[]', are the extraction operator for R.  
+    They allow you to select specific elements from R objects.  The process 
+    of extracting specific elements or values from data objects is called indexing.
+
+- Class: cmd_question
+  Output: Display the tenth value in 'ar.study' by entering 'ar.study[10]'.
+  CorrectAnswer: ar.study[10]
+  AnswerTests: omnitest(correctExpr='ar.study[10]')
+  Hint: Enter 'ar.study[10]' exactly but omit the quotes.
+
+- Class: text
+  Output: You are not limited to a single integer for extraction.  You can 
+    create a vector and use it to index another vector.
+
+- Class: text
+  Output: We will use the combine function, 'c()', to create a vector to 
+    extract specific information from 'ar.study'.
+
+- Class: cmd_question
+  Output: Go to the help page for 'c()' by entering '?c'.
+  CorrectAnswer: ?c
+  AnswerTests: omnitest(correctExpr='?c')
+  Hint: Enter '?c' exactly but omit the quotes.
+
+- Class: text
+  Output: The combine function has two arguments, '...' and 'recursive'  
+    It is very unlikely that you will ever need to set 'recursive=TRUE' because 
+    it combines all elements in a list to a vector.  This operation is rarely 
+    necessary.
+
+- Class: text
+  Output: The '...', 'three dots' or, more properly, 'ellipsis' argument allows 
+    a function to accept a variable number of arguments.  This makes perfect 
+    sense for 'c()' because it allows a user to combine values to make a vector 
+    of almost any length (there is an upper limit).
+
+- Class: text
+  Output: Remember, vectors must contain data of the same type.  If you try 
+    to combine data of different types into a vector, they will be converted 
+    to the best compatible common type.
+
+- Class: cmd_question
+  Output: Try to generate a vector of mixed data types by entering 
+    'c(1, 1.1, TRUE, "maybe")'.
+  CorrectAnswer: c(1, 1.1, TRUE, "maybe")
+  AnswerTests: omnitest(correctExpr='c(1, 1.1, TRUE, "maybe")')
+  Hint: Enter 'c(1, 1.1, TRUE, "maybe")' exactly but omit the quotes.
+
+- Class: text
+  Output: The displayed vector has quotes around every value indicating that 
+    this is a character vector.
+
+- Class: text
+  Output: Now, we are ready to make an integer vector to index 'ar.study'.
+
+- Class: cmd_question
+  Output: Enter 'my.index <- c(1, 3, 7, 13)' to create a vector that can be 
+    used to extract the values at positions 1, 3, 7 and 13 from a vector.
+  CorrectAnswer: my.index <- c(1, 3, 7, 13)
+  AnswerTests: omnitest(correctExpr='my.index <- c(1, 3, 7, 13)')
+  Hint: Enter 'my.index <- c(1, 3, 7, 13)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Display values at positions 1, 3, 7 and 13 of 'ar.value' by entering 
+    'ar.value[my.index]'.
+  CorrectAnswer: ar.value[my.index]
+  AnswerTests: omnitest(correctExpr='ar.value[my.index]')
+  Hint: Enter 'ar.value[my.index]' exactly but omit the quotes.
+
+- Class: text
+  Output: You can also omit specific values from a vector by passing a 
+    negative index.
+
+- Class: cmd_question
+  Output: Omit values 1, 3, 7 and 13 from 'ar.value' by entering 
+    'ar.value[-my.index]'.
+  CorrectAnswer: ar.value[-my.index]
+  AnswerTests: omnitest(correctExpr='ar.value[-my.index]')
+  Hint: Enter 'ar.value[-my.index]' exactly but omit the quotes.
+
+- Class: text
+  Output: You can extract values in any order that you wish.
+
+- Class: cmd_question
+  Output: Extract values 30 and 1 from 'ar.value' by entering 'ar.value[c(30, 1)]'.
+  CorrectAnswer: ar.value[c(30, 1)]
+  AnswerTests: omnitest(correctExpr='ar.value[c(30, 1)]')
+  Hint: Enter 'ar.value[c(30, 1)]' exactly but omit the quotes.
+
+- Class: text
+  Output: Be careful when extracting data by indexing because you can try 
+    to extract data that does not exist!
+
+- Class: cmd_question
+  Output: Try to extract the value at position 50 in 'ar.value' by entering 
+    'ar.value[50]'..
+  CorrectAnswer: ar.value[50]
+  AnswerTests: omnitest(correctExpr='ar.value[50]')
+  Hint: Enter 'ar.value[50]' exactly but omit the quotes.
+
+- Class: text
+  Output: This returns the special value, 'NA', for Not Available or Missing 
+    Values because there are only 30 values in 'ar.value'.
+
+- Class: text
+  Output: Another important point about character vectors.  Do not confuse 
+    the length of a character vector with the number of characters in each 
+    character string in that vector.
+
+- Class: text
+  Output: You can determine the number of characters in a character string 
+    with the 'nchar()' function.
+
+- Class: cmd_question
+  Output: Determine the number of characters in the tenth value of 'ar.study' 
+    by entering 'nchar(ar.study[10])'.
+  CorrectAnswer: nchar(ar.study[10])
+  AnswerTests: omnitest(correctExpr='nchar(ar.study[10])')
+  Hint: Enter 'ar.study[10]' exactly but omit the quotes.
+
+- Class: text
+  Output: On great feature of vectors in R is that many functions are vectorized, 
+    they can accept a vector as input and return a vector as output.
+
+- Class: cmd_question
+  Output: Determine the number of characters for every value in 'ar.study' 
+    by entering 'nchar(ar.study)'.
+  CorrectAnswer: nchar(ar.study)
+  AnswerTests: omnitest(correctExpr='nchar(ar.study)')
+  Hint: Enter 'nchar(ar.study)' exactly but omit the quotes.
+
+- Class: text
+  Output: You should see 30 integer values ranging from 27 to 84.
+
+- Class: text
+  Output: We will use 'ar.study' again later.  Let us move on to the other 
+    objects.
+
+- Class: cmd_question
+  Output: Determine the class of 'ar.value' by entering 'class(ar.value)'.
+  CorrectAnswer: class(ar.value)
+  AnswerTests: omnitest(correctExpr='class(ar.value)')
+  Hint: Enter 'class(ar.value)' exactly but omit the quotes.
+
+- Class: text
+  Output: The object 'ar.value' is a numeric vector that contains the median 
+    expression values for the AR gene in each TCGA cancer study.  This expression 
+    value is determined by a TCGA pipeline.  It is an absolute measure of 
+    expression, not a fold-change.  However, it has been log2 transformed.
+
+- Class: cmd_question
+  Output: You can display the data by entering 'ar.value' in the Console.
+  CorrectAnswer: ar.value
+  AnswerTests: omnitest(correctExpr='ar.value')
+  Hint: Enter 'ar.value' exactly but omit the quotes.
+
+- Class: text
+  Output: This gives us some impression of the data, e.g. it ranges from 
+    roughly zero to ten, and, given that we have 8 decimel places, you might 
+    assume the data is quite precise (definitely not true).
+
+- Class: text
+  Output: When I work with a quantitative variable, I try to do a bit of 
+    data exploration.  R has many functions to facilitate this.
+
+- Class: cmd_question
+  Output: Get summary statistics by entering 'summary(ar.value)'.
+  CorrectAnswer: summary(ar.value)
+  AnswerTests: omnitest(correctExpr='summary(ar.value)')
+  Hint: Enter 'summary(ar.value)' exactly but omit the quotes.
+
+- Class: text
+  Output: The function 'summary()' provides a good deal of information, 
+    including the minimum and maximum values, as well as the mean and median.  
+
+- Class: text
+  Output: The 'min()', 'max()', 'mean()' and 'median()' functions can also 
+    be used to calculate these summary statistics.
+
+- Class: text
+  Output: Use caution with the 'summary()' function because it is intended 
+    to provide an easy to comprehend summary of the data.  As such, it is 
+    not always precise because, by default, it limits the number of decimel 
+    places it will display!
+
+- Class: cmd_question
+  Output: Get a more precise value for the mean of 'ar.value' by entering 
+    'mean(ar.value)'.
+  CorrectAnswer: mean(ar.value)
+  AnswerTests: omnitest(correctExpr='mean(ar.value)')
+  Hint: Enter 'mean(ar.value)' exactly but omit the quotes.
+
+- Class: text
+  Output: The summary of 'ar.value' suggests that the mean is 3.94200, whereas 
+    the function 'mean()' indicates that it is 3.941892.  In fact, neither are 
+    correct.  There can be a difference between the way that R displays data 
+    and how it stores data.
+
+- Class: cmd_question
+  Output: Create a variable called 'ar.mean' that is the mean of 'ar.value' 
+    by entering 'ar.mean <- mean(ar.value)'.
+  CorrectAnswer: ar.mean <- mean(ar.value)
+  AnswerTests: omnitest(correctExpr='ar.mean <- mean(ar.value)')
+  Hint: Enter 'ar.mean <- mean(ar.value)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Display the value of 'ar.mean' by entering 'ar.mean'.
+  CorrectAnswer: ar.mean
+  AnswerTests: omnitest(correctExpr='ar.mean')
+  Hint: Enter 'ar.mean' exactly but omit the quotes.
+
+- Class: text
+  Output: Again, the displayed value is given to 7 digits.  However, what 
+    is the actual value stored as 'ar.mean'?
+
+- Class: cmd_question
+  Output: Display the value of 'ar.mean' to the maximum number of digits 
+    by entering 'print(ar.mean, digits=22)'.
+  CorrectAnswer: print(ar.mean, digits=22)
+  AnswerTests: omnitest(correctExpr='print(ar.mean, digits=22)')
+  Hint: Enter 'ar.mean' exactly but omit the quotes.
+
+- Class: text
+  Output: This example illustrates that you need to use caution with 
+    numeric values when programming with R.  Values will be rounded for 
+    display purposes, but they may be stored to many more digits!
+
+- Class: text
+  Output: Back to the exploration of 'ar.value'.  We have summary statistics, 
+    but it is always a good idea to visualize data.
+
+- Class: cmd_question
+  Output: Make a simple plot of 'ar.value' by entering 'plot(ar.value)'.
+  CorrectAnswer: plot(ar.value)
+  AnswerTests: omnitest(correctExpr='plot(ar.value)')
+  Hint: Enter 'plot(ar.value)' exactly but omit the quotes.
+
+- Class: text
+  Output: The function 'plot()' is generic R function that has many different 
+    methods.  What this means is that the output of 'plot()' will depend on 
+    the class of the input object.
+
+- Class: text
+  Output: We passed only the numeric vector 'ar.value' to 'plot()'.  By 
+    default, R will use 'ar.value' as the dependent variable, and the position 
+    or index in the vector as x variable.
+
+- Class: text
+  Output: This plot is not particularly informative, and we would need to 
+    play with the dozens of arguments and parameters that can be used with 
+    'plot()' to produce something better.
+
+- Class: text
+  Output: A dot chart is a good way to plot this data.
+
+- Class: cmd_question
+  Output: Go to the help page for 'dotchart()' by entering '?dotchart'.
+  CorrectAnswer: ?dotchart
+  AnswerTests: omnitest(correctExpr='?dotchart')
+  Hint: Enter '?dotchart' exactly but omit the quotes.
+
+- Class: text
+  Output: With 'dotchart()' we can easily pass labels for 'ar.value' with the 
+    label argument.  We have these is the vector, 'ar.study'.  However, the 
+    names of the cancer studies are quite long so we will use the function 
+    'substr()' to produce shorter substrings of 'ar.study'.
+
+- Class: cmd_question
+  Output: Make a new character vector of labels by entering 'ar.labels <- 
+    substr(ar.study, start=1, stop=15)'.
+  CorrectAnswer: ar.labels <- substr(ar.study, start=1, stop=15)
+  AnswerTests: omnitest(correctExpr='ar.labels <- substr(ar.study, start=1, stop=15)')
+  Hint: Enter 'ar.labels <- substr(ar.study, start=1, stop=15)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Produce a labeled dot chart by entering 'dotchart(x=ar.value, 
+    labels=ar.labels, main="AR Gene Expression", cex=0.8)'.
+  CorrectAnswer: dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.8)
+  AnswerTests: omnitest(correctExpr='dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.8)')
+  Hint: Enter 'dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.8)' exactly but omit the quotes.
+
+- Class: text
+  Output: We now have a clearly labeled plot.  The argument 'cex=0.8' was 
+    passed so that the plot labels are a little smaller than the default.  
+    However, depending on the size of your display, the labels may overlap.  
+    You can try a smaller value for 'cex' to adjust this.
+
+- Class: cmd_question
+  Output: Make a new dot chart with smaller labels by entering 
+    'dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.7)'.
+  CorrectAnswer: dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.7)
+  AnswerTests: omnitest(correctExpr='dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.7)')
+  Hint: Enter 'dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.7)' exactly but omit the quotes.
+
+- Class: text
+  Output: If the labels on the chart still overlap, you can use Zoom in the 
+    upper left of the Plots pane.  This will send the plot to a separate 
+    window that you can resize as needed.
+
+- Class: text
+  Output: When generating graphics in R for publication or sharing, you will 
+    send the results directly to a file.  The Plots panel and Export features 
+    are useful only for generating draft figures.  For example, our dot chart 
+    could still benefit from additional information.
+
+- Class: text
+  Output: We can group the cancer studies by tissue of origin using the object 
+    'ar.tissue', but, first, we need to know more about this object.
+
+- Class: cmd_question
+  Output: Enter the expression that will determine the class of 'ar.tissue'.
+  CorrectAnswer: class(ar.tissue)
+  AnswerTests: omnitest(correctExpr='class(ar.tissue)')
+  Hint: Enter 'class(ar.tissue)' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Go to the help page for 'factor()' by entering '?factor'.
+  CorrectAnswer: ?factor
+  AnswerTests: omnitest(correctExpr='?factor')
+  Hint: Enter '?factor' exactly but omit the quotes.
+
+- Class: text
+  Output: A factor is a class of object used to store categorical data.  
+    Categorical data is characterized by having only a limited number of 
+    valid values or levels.
+
+- Class: text
+  Output: Simple examples include undergraduate student standing (freshman, 
+    sophomore, junior, or senior) or state of primary residence.
+
+- Class: text
+  Output: The purpose of factors or categorical data is that allows you to 
+    group data easily.  In our example, we want to group the cancer studies 
+    by tissue of origin.
+
+- Class: text
+  Output: The most common way to create an object of class factor is with 
+    the 'as.factor()' function on an existing vector (usually of class character).
+
+- Class: text
+  Output: However, it only makes sense to convert a vector to a factor if 
+    you have clear categories in the data.  For example, it does not make 
+    sense to convert 'ar.study' to a factor because each study is a unique 
+    value.
+
+- Class: text
+  Output: Factors behave very much like vectors, but there are important 
+    differences.  For example, compare the result when you display the contents 
+    of 'ar.study' and 'ar.tissue'.
+
+- Class: cmd_question
+  Output: Enter 'ar.study' to display its values in the console.
+  CorrectAnswer: ar.study
+  AnswerTests: omnitest(correctExpr='ar.study')
+  Hint: Enter 'ar.study' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Enter 'ar.tissue' to display its values in the console.
+  CorrectAnswer: ar.tissue
+  AnswerTests: omnitest(correctExpr='ar.tissue')
+  Hint: Enter 'ar.tissue' exactly but omit the quotes.
+
+- Class: text
+  Output: Note that the values of 'ar.study' are flanked by quotes.  This 
+    is always true for character strings.  
+
+- Class: text
+  Output: The values for 'ar.tissue' are not flanked by quotes.  In addition, 
+    the levels for 'ar.tissue' are listed.  The levels for a factor are the 
+    only allowed values.
+
+- Class: text
+  Output: Now that we understand 'ar.tissue' we can it as a grouping variable 
+    in our dotchart.
+
+- Class: cmd_question
+  Output: Produce a dot chart by entering 'dotchart(x=ar.value, 
+    labels=ar.labels, main="AR Gene Expression", cex=0.8, groups=ar.tissue, xlab="RNAseq RSEM Value (log2)")'.
+  CorrectAnswer: dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.8, groups=ar.tissue, xlab="RNAseq RSEM Value (log2)")
+  AnswerTests: omnitest(correctExpr='dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.8, groups=ar.tissue, xlab="RNAseq RSEM Value (log2)")')
+  Hint: Enter 'dotchart(x=ar.value, labels=ar.labels, main="AR Gene Expression", cex=0.8, groups=ar.tissue, xlab="RNAseq RSEM Value (log2)")' exactly but omit the quotes.
+
+- Class: text
+  Output: This chart provides a more organized view of the results using 
+    three separate vectors or factors.  For example, we can see that some 
+    of the urologic cancers have elevated AR expression while this is not 
+    true of the hematologic cancers.
+
+- Class: text
+  Output: There are two classes or modes of vector that we have not covered.  
+    An integer vector is similiar to a numeric vector in most respects, but 
+    it can contain only whole numbers.  Integer vectors are stored more compactly 
+    than numeric vectors so it makes sense to use them when you can.
+
+- Class: text
+  Output: A logical vector can only contain the values TRUE, FALSE and NA.  
+    T and F are generally equivalent to TRUE and FALSE, although not on some 
+    computers.
+
+- Class: text
+  Output: Logical vectors are usually created as a result of a relational 
+    operations or Boolean expressions.  Some functions such as 'identical()' 
+    and 'is.na()' produce logical vectors.
+
+- Class: text
+  Output: In addition, integer and numeric values have logical equivalents, 
+    and vice versa.  Zero is equivalent to FALSE.  Any non-zero number is 
+    equivalent to TRUE.  TRUE is equivalent to one.  Keep this in mind because 
+    it can become handy.  Here are two examples to illustrate.
+
+- Class: cmd_question
+  Output: Enter 'sum(c(TRUE, TRUE, FALSE, FALSE))'.
+  CorrectAnswer: sum(c(TRUE, TRUE, FALSE, FALSE))
+  AnswerTests: omnitest(correctExpr='sum(c(TRUE, TRUE, FALSE, FALSE))')
+  Hint: Enter 'sum(c(TRUE, TRUE, FALSE, FALSE))' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Enter 'as.logical(c(1, 10.1, -200, 0, 0))'.
+  CorrectAnswer: as.logical(c(1, 10.1, -200, 0, 0))
+  AnswerTests: omnitest(correctExpr='as.logical(c(1, 10.1, -200, 0, 0))')
+  Hint: Enter 'as.logical(c(1, 10.1, -200, 0, 0))' exactly but omit the quotes.
+
+- Class: text
+  Output: You can use a logical vector to index the cancer studies based on 
+    AR expression level.  High AR expression can be defined as any study 
+    where AR expression is 6 or greater.
+
+- Class: cmd_question
+  Output: Create a logical vector by entering 'high.ar <- ar.value >= 6'.
+  CorrectAnswer: high.ar <- ar.value >= 6
+  AnswerTests: omnitest(correctExpr='high.ar <- ar.value >= 6')
+  Hint: Enter 'high.ar <- ar.value >= 6' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Display the logical vector by entering 'high.ar'.
+  CorrectAnswer: high.ar
+  AnswerTests: omnitest(correctExpr='high.ar')
+  Hint: Enter 'high.ar' exactly but omit the quotes.
+
+- Class: text
+  Output: You should see that we now have a TRUE or FALSE evaluation of the 
+    'ar.value >= 6' for every cancer study.
+
+- Class: cmd_question
+  Output: Display the cancer studies with high AR expression by entering 
+    'ar.study[high.ar]'.
+  CorrectAnswer: ar.study[high.ar]
+  AnswerTests: omnitest(correctExpr='ar.study[high.ar]')
+  Hint: Enter 'ar.study[high.ar]' exactly but omit the quotes.
+
+- Class: text
+  Output: We can also explore the relationship between high AR expression 
+    and tissue of origin with the 'table()' function.
+
+- Class: cmd_question
+  Output: Enter 'table(ar.tissue, high.ar)' to generate the table.
+  CorrectAnswer: table(ar.tissue, high.ar)
+  AnswerTests: omnitest(correctExpr='table(ar.tissue, high.ar)')
+  Hint: Enter 'table(ar.tissue, high.ar)' exactly but omit the quotes.
+
+- Class: text
+  Output: This table suggests that high AR expression is only associated 
+    with cancers from certain tissues.  However, the data is not sufficient 
+    to make any strong assertions.
+
+- Class: text
+  Output: An important point of this lesson is that each of the objects 
+    that we used in this lesson are all in the same order, i.e. the eleventh 
+    value in each object contains data for the same cancer study.
+
+- Class: text
+  Output: Certain functions such as 'sort()' and 'order()' can change the 
+    position of values in a vector.  If done carelessly, your vectors are 
+    no longer aligned.
+
+- Class: text
+  Output: This potential problem points to the need for an object that can 
+    combines a group of aligned vectors.  This class of object is called a 
+    dataframe, and will be convered in the next lesson.
+
+- Class: text
+  Output: Time for a short quiz.  Use the help menu or try various answers 
+    as much as you need to.  There is no penalty for incorrect answers, but 
+    you must find the correct answer before you can proceed.  
+
+- Class: cmd_question
+  Output: Enter the expression that will extract the values at positions 
+    5, 25, and 15 from 'ar.study' in that order!
+  CorrectAnswer: ar.study[c(5, 25, 15)]
+  AnswerTests: omnitest(correctExpr='ar.study[c(5, 25, 15)]')
+  Hint: You need to use 'c()' and '[]'.
+
+- Class: cmd_question
+  Output: How long is the vector that results from 'ar.value[-c(1, 11, 21, 31)]'?
+  CorrectAnswer: 27
+  AnswerTests: omnitest(correctVal=27)
+  Hint: What happens if you index outside the actual positions in a vector?
+
+- Class: cmd_question
+  Output: Not all vectors are sensible candidates for factors.  
+    What is the maximum value in this table - 'table(as.factor(ar.study))'?
+  CorrectAnswer: 1
+  AnswerTests: omnitest(correctVal='1')
+  Hint: Use 'table()' to determine the answer.
+
+- Class: cmd_question
+  Output: What is the result for this expression 'sum(ar.tissue=="cns")'?
+  CorrectAnswer: 2
+  AnswerTests: omnitest(correctVal='2')
+  Hint: The double equals, '==', is the relational operator for equality.
+
+- Class: cmd_question
+  Output: Not all vectors are sensible candidates for factors.  
+    What is the maximum value in this table - 'table(as.factor(ar.study))'?
+  CorrectAnswer: 1
+  AnswerTests: omnitest(correctVal='1')
+  Hint: Use 'table()' to determine the answer.
+
+- Class: text
+  Output: You have completed lesson02.  Now you need to write the completion 
+    key to "lessonKeys.txt".  Since the file already exists and contains 
+    information we need to preserve, we will use 'append=TRUE' as an argument.
+
+- Class: cmd_question
+  Output: Enter 'write("Lesson02_RGKPS", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)' to append 
+    the key for lesson02 to the file "lessonKeys.txt".
+  CorrectAnswer: write("Lesson02_RGKPS", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)
+  AnswerTests: omnitest(correctExp='write("Lesson02_RGKPS", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)')
+  Hint: Enter 'write("Lesson02_RGKPS", file="~/BigTapSwirl/lessonKeys.txt", append=TRUE)' omitting the quotes.
+
+- Class: text
+  Output: If you could not create "lessonKeys.txt", please copy and paste the 
+    key into a Word or text document.
+
+

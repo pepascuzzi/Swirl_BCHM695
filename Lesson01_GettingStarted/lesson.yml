@@ -1,0 +1,471 @@
+- Class: meta
+  Course: IntroToR
+  Lesson: Lesson01_GettingStarted
+  Author: Pete E. Pascuzzi
+  Type: Standard
+  Organization: Purdue University
+  Version: 2.4.2
+
+- Class: text
+  Output: This lesson will provide a basic introduction to working with 
+    R interactively.  I assume that you are using RStudio, and that you 
+    have had a basic introduction to that application.
+
+- Class: text
+  Output: In addition, when you started 'swirl' for the first time, it ran 
+    you through a brief lesson on how to use swirl.
+
+- Class: text
+  Output: Throughout this lesson, I will prompt you to type and enter 
+    specific expressions or assignments in the Console.  The information 
+    that you need to enter will be flanked by single quotes, ''.  Do 
+    not type the quotes themselves!  After you have typed the information,
+    hit return/enter.
+
+- Class: text
+  Output: As you work through this lesson, you will see a bar comprised 
+    of equal signs that keeps growing.  This is followed by a percentage 
+    at the extreme right of the Console.  These indicate your progress on 
+    your current swirl lesson.
+
+- Class: text
+  Output: Note the prompt that is shown in the console window.  Currently, 
+    you should see three periods, '...', followed by your cursor.  This is 
+    standard if you are running swirl, and R is waiting for you to hit 
+    enter to proceed.
+
+- Class: text
+  Output: If you have reached a point in the swirl lesson where other input 
+    is expected, you should see a greater than sign, '>', followed by 
+    your cursor.  This is indicates that R is ready to receive input.
+
+- Class: text
+  Output: If R is working on a calculation, there should be no prompt 
+    next to your cursor.  In addition, there should be a small stop sign 
+    icon in the upper right corner of the Console pane.
+
+- Class: text
+  Output: If R is waiting for additional input, then the prompt should be 
+    the plus sign, '+' followed by your cursor.  If you are not sure what input 
+    R is expecting, you can get back to the '>' prompt by hitting the 
+    Control and C keys at the same time.
+
+- Class: text
+  Output: Let's start working with R.  At a minimum, R is a great calculator with 
+    many available arithmetic functions. 
+
+- Class: cmd_question
+  Output: Enter '1 + 1' (omit the quotes) in the Console.
+    NOTE - YOU SHOULD SEE THE GREATER THAN CURSOR NOW.
+  CorrectAnswer: 1 + 1
+  AnswerTests: omnitest(correctExpr='1 + 1')
+  Hint: Enter '1 + 1' exactly but omit the quotes.
+
+- Class: text
+  Output: R performs the calculation and returns the result to the Console.  
+    The result is preceded by '[1]'.  Just ignore this for now.  It is an 
+    indexing value that will be covered later.
+
+- Class: text
+  Output: What happens if we enter an incomplete expression?  The R cursor 
+    will change to a plus sign, "+".  Simply complete your expression and 
+    hit return/enter.
+
+- Class: cmd_question
+  Output: Enter '1 + ' (omit the quotes) in the Console.  
+    NOTE - YOU SHOULD SEE THE PLUS CURSOR AFTER DOING THIS. COMPLETE THE
+    EXPRESSION BY ENTERING 1.
+  CorrectAnswer: 1 + 1
+  AnswerTests: omnitest(correctExpr='1 + 1')
+  Hint: Enter '1 + 1' exactly but omit the quotes.
+
+- Class: text
+  Output: Just like a calculator, arithmetic operations are executed in 
+    order of precedent.  This can be controlled by using parentheses.
+
+- Class: cmd_question
+  Output: Enter '1 + 1 * 2' in the Console.
+  CorrectAnswer: 1 + 1 * 2
+  AnswerTests: omnitest(correctExpr='1 + 1 * 2')
+  Hint: Enter '1 + 1 * 2' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Enter '(1 + 1) * 2' in the Console.
+  CorrectAnswer: (1 + 1) * 2
+  AnswerTests: omnitest(correctExpr='(1 + 1) * 2')
+  Hint: Enter '(1 + 1) * 2' exactly but omit the quotes.
+
+- Class: text
+  Output: As you can see, the parenthesis change the result significantly.
+    Do not forget these simple rules in your calculations!
+
+- Class: text
+  Output: Formulas can become quite complicated, and it can be easy to 
+    lose track of your parenthesis.
+
+- Class: cmd_question
+  Output: Enter '((1 + 1) * (2 - 1))/(10 - 2)' in the Console.
+  CorrectAnswer: ((1 + 1) * (2 - 1))/(10 - 2)
+  AnswerTests: omnitest(correctExpr='((1 + 1) * (2 - 1))/(10 - 2)')
+  Hint: Enter '((1 + 1) * (2 - 1))/(10 - 2)' exactly but omit the quotes.
+
+- Class: text
+  Output: A better way to do such calculations, especially if you need to 
+    reuse the formula, is to create variables and perform the calculations 
+    stepwise.
+
+- Class: text
+  Output: To do this, we must create variables and assign value(s) to them.  
+    This can be done in a single statement.
+
+- Class: cmd_question
+  Output: Create a variable called x and assign the value 2 to it  
+    by entering 'x <- 1 + 1'.
+  CorrectAnswer: x <- 1 + 1
+  AnswerTests: omnitest(correctExpr='x <- 1 + 1')
+  Hint: Enter 'x <- 1 + 1' exactly but omit the quotes.
+
+- Class: text
+  Output: The assignment operator, '<-', is used to assign a value or values 
+    to a variable.  If the variable already exists, the new value will be 
+    assigned.  If the variable does not exist, it will be created.
+    NOTE - IT IS VERY EASY TO ACCIDENTALLY OVERWRITE A VARIABLE WITH A 
+    NEW VALUE!
+
+- Class: cmd_question
+  Output: Create a variable called y and assign the value 1 to it  
+    by entering 'y <- 2 - 1'.
+  CorrectAnswer: y <- 2 - 1
+  AnswerTests: omnitest(correctExpr='y <- 2 - 1')
+  Hint: Enter 'y <- 2 - 1' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Create a variable called z and assign the value 8 to it by entering 
+    'z <- 10 - 2'.
+  CorrectAnswer: z <- 10 - 2
+  AnswerTests: omnitest(correctExpr='z <- 10 - 2')
+  Hint: Try 'z <- 10 - 2' exactly but omit the quotes.
+
+- Class: cmd_question
+  Output: Complete the previous calculation by entering 'x * y / z'. 
+  CorrectAnswer: x * y / z
+  AnswerTests: omnitest(correctExpr='x * y / z')
+  Hint: Try 'x * y / z' exactly but omit the quotes.
+
+- Class: text
+  Output: R has many built in mathematic functions.
+
+- Class: text
+  Output: You can compute the logarithm for any number and base using the 
+    'log()' function.  
+    NOTE - 'LOG()' IS A FUNCTION IN R.  THROUGHOUT THIS COURSE, FUNCTION NAMES
+    WILL BE FOLLOWED BY PARENTHESIS AND ENCLOSED BY QUOTES.
+
+- Class: cmd_question
+  Output: Enter 'log(x=10, base=10)' to compute the base 10 log of 10.
+  CorrectAnswer: log(x=10, base=10)
+  AnswerTests: omnitest(correctExpr='log(x=10, base=10)')
+  Hint: Enter 'log(x=10, base=10)' exactly but omit the quotes.
+
+- Class: text
+  Output: This is our first typical R function.  Functions are essentially 
+    small programs that are designed to perform a specific task.
+
+- Class: text
+  Output: From a user's perspective, R functions have three basic parts - 
+    a name, arguments, and computer code.
+
+- Class: text
+  Output: The name of the 'log()' function in 'log'.
+
+- Class: text
+  Output: The arguments for the 'log()' function are 'x' and 'base'.  
+    NOTE - FUNCTIONS ARE ALWAYS FOLLOWED BY PARENTHESIS THAT ENCLOSE 
+    THE ARGUMENTS PASSED TO THE FUNCTION.  THE PARENTHESIS ARE REQUIRED 
+    EVEN IF NO ARGUMENTS ARE PASSED!  MULTIPLE ARGUMENTS TO A FUNCTION ARE 
+    SEPARATED BY COMMAS.
+
+- Class: text
+  Output: If you forget to follow a function call with parenthesis, R will 
+    display the underlying code for that function.  Most users will not 
+    have a need to display or alter the underlying code for a function.
+
+- Class: text
+  Output: The 'log()' function has two arguments, 'x' and 'base'.  The arguments
+    are separated by commas.  If you forget the commas, R will get confused.
+
+- Class: text
+  Output: Some arguments for a function may have default values, values that 
+    were preset by the person that wrote the function.  If the default value 
+    is fine for you purpose, you do not need to explicitly define that 
+    argument.
+
+- Class: text
+  Output: For example, the default value of 'log()' for 'base' is base e, the 
+    natural log.  If you want the natural log, you do not need to define 'base'.
+
+- Class: text
+  Output: Arguments that do not have default values must be explicitly defined 
+    when you call the function.  For example, you must define 'x' when you 
+    call 'log()' because you cannot take the log of nothing, and R will generate 
+    an error.
+
+- Class: text
+  Output: In an interactive R session, most errors will simply affect the 
+    statement that produced them.  However, R errors can have more serious effects.  
+    For example, R errors can disrupt 'swirl', kicking you out of your current 
+    session.
+
+- Class: text
+  Output: To demonstrate a missing argument error with 'log()', I need to 
+    use 'try()', an R function that can minimize the effects of an error.  It 
+    is unlikely that you will ever need to use 'try()' for routine R coding.
+
+- Class: cmd_question
+  Output: Enter 'try(log())' to generate an argument missing error.
+  CorrectAnswer: try(log())
+  AnswerTests: omnitest(correctExpr='try(log())')
+  Hint: Enter 'try(log())' exactly but omit the quotes.
+
+- Class: text
+  Output: This error message is pretty easy to understand (often they are 
+    quite cryptic).
+
+- Class: text
+  Output: The second argument of 'log()' is 'base'.  The user does not need
+    to pass a value for this argument because, by default, R calculates the 
+    natural log, base 'e'.
+
+- Class: cmd_question
+  Output: Enter 'log(x=2.718282)' to calculate the natural log of 'e'.
+  CorrectAnswer: log(x=2.718282)
+  AnswerTests: omnitest(correctExpr='log(x=2.718282)')
+  Hint: Enter 'log(x=2.718282)' exactly but omit the quotes.
+
+- Class: text
+  Output: When you assign a value to an argument in a function call, you 
+    should use a single equals sign, '='.  Some people like to include spaces 
+    before or after the '=', but I prefer to keep my code more compact.  
+    NOTE - GENERALLY R IS NOT SENSITIVE TO SPACES AND USE OF SPACES IS 
+    OFTEN A QUESTION OF CODING STYLE.
+
+- Class: text
+  Output: How do you determine the arguments for a function and the default 
+    values, if any?
+
+- Class: text
+  Output: You can find help with functions using the 'help()' function 
+    and supporting documents.  There are several ways to access the 
+    help documents.
+
+- Class: text
+  Output: You can browse the help documents from the Help Pane in 
+    RStudio, but this can be time consuming.
+
+- Class: text
+  Output: If you need help for a specific function or package, you can 
+    use the 'help()' function.
+
+- Class: cmd_question
+  Output: Search for help for the 'log()' function by entering 'help(log)'.
+  CorrectAnswer: help(log)
+  AnswerTests: omnitest(correctExpr='help(log)')
+  Hint: Enter 'help(log)' exactly but omit the quotes.
+
+- Class: text
+  Output: The help page for the 'log()' function should now be visible in 
+    the Help Pane.
+
+- Class: text
+  Output: A help page will be broken into several sections 
+    such as Description, Usage, Arguments, Details, Value, Author(s), 
+    See Also and Examples.
+
+- Class: text
+  Output: The Description section will provide a brief explanation of 
+    the function or package.
+
+- Class: text
+  Output: The Usage section will show a generic example of how the 
+    function should be used.  All arguments for that function 
+    should be shown.  If there are default values for any of these arguments, 
+    the default values will be shown as well.
+
+- Class: text
+  Output: The Arguments section will show all arguments that can be passed 
+    to the function with additional details about the type of data that 
+    is expected.
+
+- Class: text
+  Output: The Details section of a help page should provide an extended 
+    discussion of how the function works.  The quality of this section varies 
+    widely from function to function, depending on the author.  Usually, 
+    it is quite clear and detailed.  Unfortunately, some authors use a lot 
+    of jargon and provide little explanation.
+
+- Class: text
+  Output: The Value section will give you information about the result 
+    produced by a function.  This section is often quite detailed as well.
+
+- Class: text
+  Output: The Author(s), See Also and Examples section are self explanatory. 
+    However, some examples can be pretty opaque.  It is not uncommon to find 
+    examples with many lines of code that simply produce simulated data 
+    before you get to the actual use of the function.
+
+- Class: text
+  Output: Now, let's search for help with the Arithmetic functions.  
+    In fact, this illustrates a special case for 'help()' because it requires 
+    the use of backquotes.  Backquotes are ON the upper left key on the keyboard, 
+    next to the '1' key.  
+    NOTE - YOU CAN ALWAYS USE THE BACKQUOTES WITH 'HELP()'.  THEY NEVER
+    INTEFERE BUT SOMETIMES THEY ARE REQUIRED!
+
+- Class: cmd_question
+  Output: Enter 'help(`+`)' in the Console.
+  CorrectAnswer: help(`+`)
+  AnswerTests: omnitest(correctExpr='help(`+`)')
+  Hint: Enter 'help(`+`)' exactly but omit the single quotes.
+
+- Class: text
+  Output: This brings you to the help page for the Arithmetic Operators.  
+    This is a long document given the apparent simplicity of these operations. 
+
+- Class: cmd_question
+  Output: You can find additional mathematic functions by entering 'help(Math)'.
+  CorrectAnswer: help(Math)
+  AnswerTests: omnitest(correctExpr='help(Math)')
+  Hint: Enter 'help(Math)' exactly but omit the single quotes.
+
+- Class: text
+  Output: Not sure of the name of a specific function, package or page you are looking 
+    for?  You can use the 'help.search()' function to perform a textual 
+    search of the help documents.
+
+- Class: cmd_question
+  Output: Enter 'help.search("t test")'.  NOTE - THE DOUBLE QUOTES AROUND THE 
+    PHARSE "T TEST" ARE REQUIRED BECAUSE YOU ARE SEARCHING FOR A TEXT PATTERN OR 
+    CHARACTER STRING.
+  CorrectAnswer: help.search("t test")
+  AnswerTests: omnitest(correctExpr='help.search("t test")')
+  Hint: Enter 'help.search("t test")' exactly but omit the single quotes.
+
+- Class: text
+  Output: Depending on the packages that you have installed, you may retrieve 
+    a dozen or more results for "t test".
+
+- Class: text
+  Output: One final tip, both 'help()' and 'help.search()' are used so 
+    frequently that there are easier to type shortcuts.
+
+- Class: cmd_question
+  Output: Enter '?t.test' to search for help with the function 't.test()'.
+  CorrectAnswer: ?t.test
+  AnswerTests: omnitest(correctExpr='?t.test')
+  Hint: Enter '?t.test' exactly but omit the single quotes.
+
+- Class: cmd_question
+  Output: Enter '??t.test' to do a textual search on "t.test".
+  CorrectAnswer: ??t.test
+  AnswerTests: omnitest(correctExpr='??t.test')
+  Hint: Enter '??t.test' exactly but omit the single quotes.
+
+- Class: text
+  Output: Time for a short quiz.  Use the help menu or try various answers 
+    as much as you need to.  There is no penalty for incorrect answers, but 
+    you must find the correct answer before you can proceed.  
+
+- Class: cmd_question
+  Output: Enter the expression that will search for help for the 
+    'round()' function.  DO NOT USE THE SHORTCUT!
+  CorrectAnswer: help(round)
+  AnswerTests: omnitest(correctExpr='help(round)')
+  Hint: Search for the function 'round' not the text pattern!
+
+- Class: cmd_question
+  Output: How many arguments does 'round()' have?
+  CorrectAnswer: '2'
+  AnswerTests: omnitest(correctVal='2')
+  Hint: Read the help page for Round carefully!
+
+- Class: cmd_question
+  Output: Enter the expression that will round 10.22 to one 
+    decimal and assign that to a variable with the name 'my.result'.  
+    Remember to explicitly assign values to all arguments!
+  CorrectAnswer: my.result <- round(x=10.22, digits=1)
+  AnswerTests: omnitest(correctExpr='my.result <- round(x=10.22, digits=1)')
+  Hint: Remember to explicitly assign values to all arguments!
+
+- Class: cmd_question
+  Output: Enter the expression that will search for help with the exponent 
+    operator, '^'.  DO NOT USE THE SHORTCUT!
+  CorrectAnswer: help(`^`)
+  AnswerTests: omnitest(correctExpr='help(`^`)')
+  Hint: You will need to use backquotes.
+
+- Class: cmd_question
+  Output: Enter the expression that will that will multiply 'my.result' by 
+    2 then square it.  There is more than one correct way to write this 
+    expression.  Therefore, R will check for the correct answer value.
+  CorrectAnswer: (my.result*2)^2
+  AnswerTests: omnitest(correctVal=416.16)
+  Hint: Remember to use parentheses!
+
+- Class: text
+  Output: This is the end of the first lesson.  To track your progress through 
+    the course, you need to create a file to store the lesson completion codes.  
+    This file will be in your home directory in a folder named "BigTapSwirl".
+
+- Class: cmd_question
+  Output: Create a folder in your home directory called "BigTapSwirl" by 
+    entering 'dir.create("~/BigTapSwirl")'.
+  CorrectAnswer: dir.create("~/BigTapSwirl")
+  AnswerTests: omnitest(correctExp='dir.create("~/BigTapSwirl")')
+  Hint: Enter 'dir.create("~/BigTapSwirl")' removing the parentheses.
+
+- Class: cmd_question
+  Output: Confirm that "BigTapSwirl" was created by entering 'list.files("~")'.
+  CorrectAnswer: list.files("~")
+  AnswerTests: omnitest(correctExp='list.files("~")')
+  Hint: Enter 'list.files("~")' removing the parentheses.
+
+- Class: text
+  Output: You should see "BigTapSwirl" listed among the files and folders/directories 
+    in your home directory.
+
+- Class: text
+  Output: An obvious question is, where is my home directory?.
+
+- Class: cmd_question
+  Output: Display the path to your home directory on your computer by entering 
+    'normalizePath("~")'.
+  CorrectAnswer: normalizePath("~")
+  AnswerTests: omnitest(correctExp='normalizePath("~")')
+  Hint: Enter 'normalizePath("~")' omitting the quotes.
+
+- Class: text
+  Output: On a Mac you should see something like '/Users/YourName'.  On a 
+    Windows machine, you should see something like 'C:\\Users\\YourName\\Documents'.  
+    This information should help you to locate your home directory using the 
+    Finder (Mac) or File Explorer (Windows), later.
+
+- Class: text
+  Output: Now we can write the key for lesson01 to a file named "lessonKeys.txt".
+
+- Class: cmd_question
+  Output: Enter 'write("Lesson01_DJYSX", file="~/BigTapSwirl/lessonKeys.txt")' to write 
+    the key for lesson01 to the file "lessonKeys.txt".
+  CorrectAnswer: write("Lesson01_DJYSX", file="~/BigTapSwirl/lessonKeys.txt")
+  AnswerTests: omnitest(correctExp='write("Lesson01_DJYSX", file="~/BigTapSwirl/lessonKeys.txt")')
+  Hint: Enter 'write("Lesson01_DJYSX", file="~/BigTapSwirl/lessonKeys.txt")' omitting the quotes.
+
+- Class: text
+  Output: Do not lose track of this file!  You will need this information 
+    later to confirm that you have completed the course!
+
+- Class: text
+  Output: If you have difficulty creating the "BigTapSwirl" directory or 
+    the file "lessonKeys.txt", you may be limited by your computer permissions.  
+    Contact your local IT support for help, or copy and past the keys into 
+    a Word or text document manually.
+

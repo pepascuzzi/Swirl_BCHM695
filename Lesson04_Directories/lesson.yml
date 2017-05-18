@@ -1,0 +1,221 @@
+- Class: meta
+  Course: Swirl_BCHM695_R
+  Lesson: Lesson04_Directories
+  Author: Pete E. Pascuzzi
+  Type: Standard
+  Organization: Purdue University
+  Version: 2.4.3
+
+- Class: text
+  Output: To learn R, it is important to become familiar with how files 
+    are organized in directories on your computer.  On graphics-oriented 
+    operating systems such as Windows and Mac OSX, directories are represented 
+    as folders.
+
+- Class: text
+  Output: With R, you navigate and create directories and files using functions 
+    such as 'getwd()', 'setwd()', 'dir.create()', 'file.path()' and 'list.files()'.
+
+- Class: text
+  Output: When you start R, whether you use R Studio, the R app or the command
+    line, you have a working directory.  This is the location on your computer 
+    where R looks for files or saves results.
+
+- Class: cmd_question
+  Output: To determine your current working directory enter 'getwd()'.
+  CorrectAnswer: getwd()
+  AnswerTests: omnitest(correctExpr='getwd()')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: If your working directory is set to the default R working directory, 
+    you should see something like this, '/Users/YourName', on a Mac.  On a PC, 
+    it should look something like this, 'C:/Users/YourName/Documents'.  
+
+- Class: text
+  Output: These are called an absolute paths because they start from your 
+    root directory.  If you think of the directory structure of your computer 
+    as a tree, then the root directory is at the base of the tree.  All 
+    intervening subdirectories are shown, separated by forward slashes.  The 
+    path terminates with the name of your current working directory.
+
+- Class: text
+  Output: In some cases, you may see a path to a directory with a trailing 
+    forward slash, "/", e.g. 'C:/Users/YourName/Documents/'.  This is largely 
+    a matter of preference, and not required with R.
+
+- Class: text
+  Output: SYNTAX TIP.  There are two types of slashes that you will use in R.  
+    The slash or forward slash '/' and the backslash '\'.  On Unix-like operating 
+    systems, the slash is used in file paths.  On Windows, the backslash is used.  
+    However, R will only accept forward slashes in file paths regardless of 
+    operating system!  This can be confusing, but please keep this in mind if you type 
+    or copy-and-paste a Windows file path into your R code.  You need to 
+    change all backslashes to forward slashes!
+
+- Class: text
+  Output: You will frequently need to read data from files on your computer 
+    into R.  Therefore, you need some way to keep track of files.
+
+- Class: cmd_question
+  Output: Check the contents of your current working directory by entering 
+    'list.files()'.
+  CorrectAnswer: list.files()
+  AnswerTests: omnitest(correctExpr='list.files()')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: This will list all visible files and subdirectories in your 
+    current working directory.  There are several arguments to 'list.files()'
+    that will allow you to get more information.  If you set the argument 
+    'all = TRUE', then hidden files will also be displayed.
+
+- Class: text
+  Output: Two possible hidden files are ".RData" and ".Rhistory", two files 
+    that can be produced when you work with R.
+
+- Class: cmd_question
+  Output: Check for invisible files in your working directory by entering 
+    'list.files(all = TRUE)'.
+  CorrectAnswer: list.files(all = TRUE)
+  AnswerTests: omnitest(correctExpr='list.files(all = TRUE)')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: You can look at the contents of other directories as well by specifying 
+    a path for 'list.files()'.  In R, you can use Unix notations to refer 
+    to certain absolute and relative directories.
+
+- Class: text
+  Output: The forward slash, "/", indicates your root directory.  There are times 
+    when you may need to access items in your root directory, but be careful!  
+    You can really screw up your computer if you do not know what you are doing!
+
+- Class: cmd_question
+  Output: Look at the contents of your root directory by entering 'list.files(path = "/")'.
+  CorrectAnswer: list.files(path = "/")
+  AnswerTests: omnitest(correctExpr='list.files(path = "/")')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: The tilde, "~", indicates your home directory (not working directory).  
+    On computers with multiple users, this is where all user-specific data 
+    and information is stored.  Feel free to create directories and store 
+    files almost anywhere in your home directory and subdirectories.
+
+- Class: cmd_question
+  Output: Look at the contents of your home directory by entering 'list.files(path = "~")'.
+  CorrectAnswer: list.files(path = "`")
+  AnswerTests: omnitest(correctExpr='list.files(path = "`")')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: There are also two notations that are relative.  A period "." 
+    indicates your current directory, so 'list.files()' and 'list.files(".")' 
+    will produce the same results.  This shorthand notation can be quite 
+    useful for some programming tasks, e.g. look at the default values for 
+    the arguments to 'list.files()'.  You will find that 'path = "."'.
+
+- Class: text
+  Output: Two periods, "..", indicates the parent directory of your current 
+    directory, i.e. down one level towards the root directory in the directory 
+    hierarchy.
+
+- Class: cmd_question
+  Output: Look at the contents of your current parent directory by entering 
+    'list.files(path = "..")'.
+  CorrectAnswer: list.files(path = "..")
+  AnswerTests: omnitest(correctExpr='list.files(path = "..")')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: Why is all of this relevant?  Because, you will likely want to access files 
+    that are not in your working directory.  In fact, it is good 
+    practice to have a separate data directory or directories on your computer.  
+    In addition, it is likely that you will have files that are relevant for 
+    multiple projects, and it is undesirable to change the location or duplicate 
+    these files.
+
+- Class: text
+  Output: In the next few steps, you are going to begin to organize the 
+    directory for this course on your computer (or ITaP computer).  It would 
+    be a simple matter to do this with your operating system, but we will 
+    use R commands so that you will be able to program such steps in the future.
+
+- Class: cmd_question
+  Output: Create a directory for this course in your home directory by entering 
+    'dir.create(path="~/BCHM695_R")'.
+  CorrectAnswer: dir.create(path="~/BCHM695_R")
+  AnswerTests: omnitest(correctExpr='dir.create(path="~/BCHM695_R")')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: cmd_question
+  Output: Create a "data" subdirectory by entering 'dir.create(path="~/BCHM695_R/data")'.
+  CorrectAnswer: dir.create(path="~/BCHM695_R/data")
+  AnswerTests: omnitest(correctExpr='dir.create(path="~/BCHM695_R/data")')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: You can also create directories with subdirectories recursively, 
+    i.e. create both the parent directory and subdirectories with a single 
+    expression by using 'recursive = TRUE' with 'dir.create()'.
+
+- Class: cmd_question
+  Output: Create a "projects" directory in "BCHM695_R" with a subdirectory 
+    called "session02" by entering 'dir.create(path="~/BCHM695_R/projects/session02", recursive=TRUE)'.
+  CorrectAnswer: dir.create(path="~/BCHM695_R/projects/session02", recursive=TRUE)
+  AnswerTests: omnitest(correctExpr='dir.create(path="~/BCHM695_R/projects/session02", recursive=TRUE)')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: cmd_question
+  Output: Now check your directory structure by entering 
+    'list.files(path="~/BCHM695_R", include.dirs=TRUE, recursive=TRUE, full.names=TRUE)'.
+  CorrectAnswer: list.files(path="~/BCHM695_R", include.dirs=TRUE, recursive=TRUE, full.names=TRUE)
+  AnswerTests: omnitest(correctExpr='list.files(path="~/BCHM695_R", include.dirs=TRUE, recursive=TRUE, full.names=TRUE)')
+  Hint: Please type the assignment VERBATIM! (Copy and paste permitted)
+
+- Class: text
+  Output: You should now have some sense of how to navigate the directory 
+    structure of your computer in R.  We will come back to this frequently 
+    during the class.  Take the following short quiz to test yourself.
+  
+- Class: mult_question
+  Output: What symbol specifies your home directory?
+  CorrectAnswer: ~
+  AnswerChoices: ~; ..; .; /
+  AnswerTests: omnitest(correctVal='~')
+  Hint: Try again.
+
+- Class: cmd_question
+  Output: How would you create a directory named Snoopy in your home directory regardless of your current working directory?
+  CorrectAnswer: dir.create("~/Snoopy")
+  AnswerTests: omnitest(correctExpr='dir.create("~/Snoopy")')
+  Hint: How did you create "BCHM_695"?
+  
+- Class: cmd_question
+  Output: How would you list all files and directories in Snoopy regardless 
+    of your current working directory but without the full names.?
+  CorrectAnswer: list.files(path="~/BCHM_695", include.dirs=TRUE, recursive=TRUE, full.names=FALSE)
+  AnswerTests: omnitest(correctExpr='list.files(path="~/BCHM_695", include.dirs=TRUE, recursive=TRUE, full.names=FALSE)')
+  Hint: Please explicitly set the required arguments.
+  
+- Class: mult_question
+  Output: What symbol specifies the relative parent directory?
+  CorrectAnswer: ..
+  AnswerChoices: ~; ..; .; /
+  AnswerTests: omnitest(correctVal='..')
+  Hint: Try again.
+
+- Class: mult_question
+  Output: If your current working directory is "~/Snoopy/Woodstock/Linus", 
+    you could list all files in Snoopy with list.files("../..", all = T), TRUE or FALSE
+  CorrectAnswer: TRUE
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: omnitest(correctVal='TRUE')
+  Hint: You can use .. and . multiple times when specifying a path.
+
+- Class: cmd_question
+  Output: What is a quick way to change your working directory to the parent directory?
+  CorrectAnswer: setwd(dir="..")
+  AnswerTests: omnitest(correctExpr='setwd(dir="..")')
+  Hint: Use 'setwd(dir= )'
