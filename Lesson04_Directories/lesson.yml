@@ -195,8 +195,8 @@
 - Class: cmd_question
   Output: How would you list all files and directories in Snoopy regardless 
     of your current working directory but without the full names.?
-  CorrectAnswer: list.files(path="~/BCHM_695", include.dirs=TRUE, recursive=TRUE, full.names=FALSE)
-  AnswerTests: omnitest(correctExpr='list.files(path="~/BCHM_695", include.dirs=TRUE, recursive=TRUE, full.names=FALSE)')
+  CorrectAnswer: list.files(path="~/Snoopy", include.dirs=TRUE, recursive=TRUE, full.names=FALSE)
+  AnswerTests: omnitest(correctExpr='list.files(path="~/Snoopy", include.dirs=TRUE, recursive=TRUE, full.names=FALSE)')
   Hint: Please explicitly set the required arguments.
   
 - Class: mult_question
